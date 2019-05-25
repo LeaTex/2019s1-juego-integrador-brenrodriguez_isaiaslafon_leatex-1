@@ -14,5 +14,5 @@
 
 6) Extended Google T-Rex Runner game type.
 
-7) Rubik Cube represented in 2D.
+7) Rubik Cube 2D version.
  
