@@ -31,16 +31,16 @@ Objects and classes to implement descriptions:
 	-Belt transporter.
 		Move Bobby in direction to the next tile at the end of the belt.
 		Change direction checking switch position.
-		Can have 1 or two states at the begining and change direction.
+		Can have 1 or two states at the beginning and change direction.
 		Is linked to switches. 
 
 	-Rotational runway.
-		Exist in L or Sstraigh shape.
+		Exist in L or Straight shape.
 		Rotate every time something pass through.
 	
 	-Walkable Tile superclass. 
 		Can be walkable and have a constant image 
-		or Can have a grabable item and change image and properties after player collition (hole after carrot removed).	
+		or Can have a grabbable item and change image and properties after player collision (hole after carrot removed).	
 
 #Special Objects:
 	-spawn point
