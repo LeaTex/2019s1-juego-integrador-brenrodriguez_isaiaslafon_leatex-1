@@ -3,10 +3,10 @@ import wollok.game.*
 
 class Caja {
 	var property position = game.center()
-	method imagen() = "spot.png"
+	method image() = "spot.png"
 }
 
 object player {
 	var property position = game.center()
-	method imagen() = "player.png"
+	method image() = "player.png"
 }
