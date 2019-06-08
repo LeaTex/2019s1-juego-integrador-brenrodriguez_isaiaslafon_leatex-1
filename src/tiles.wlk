@@ -7,7 +7,7 @@ class Wall {
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 
-	method image() = "./tiles/grass/middleGrass.png"
+	method image() = "./tiles/fences/fenceHorizontal.png"
 
 	method canBeSteppedOn() = false
 
@@ -22,7 +22,7 @@ class Grass {
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 
-	method image() = "spot.png"
+	method image() = "./tiles/grass/middleGrass.png"
 
 	method canBeSteppedOn() = false
 
