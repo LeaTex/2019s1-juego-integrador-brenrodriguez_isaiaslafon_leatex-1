@@ -1,6 +1,6 @@
 import wollok.game.*
 
-class Wall {
+class Fence {
 	var property position
 
 	constructor() = self(game.center())
