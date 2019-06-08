@@ -67,8 +67,26 @@ class Level {
 
 /* A WKO with a hardcoded list of level to play */
 object levelsList {
+	var levels = []
+	
+	method levels() {
+		if (levels.isEmpty()) self.initializeLevels()
+		
+		return levels
+	}
+	method level(index) { return self.levels().get(index-1) }
+	
+	method initializeLevels() {
+		levels.add(self.levelOne())
+	}
+
+	method addExtraLevelForMap(aMap) {
+		var levelNumber = self.levels().size() + 1
+		levels.add(new Level(levelNumber,aMap))
+	}
+	
 	method levelOne() {
-		var map = new Map(15,15)
+		var map = new Map(13,13)
 		map.startPoint(3,3)
 		map.endPoint(5,5)
 	
@@ -79,5 +97,19 @@ object levelsList {
 		map.addCarrot(1,9)
 		
 		return new Level(1,map)
+	}
+	method levelTwo() {
+		var map = new Map(12,12)
+		map.startPoint(6,1)
+		map.endPoint(10,10)
+	
+		map.addCarrot(1,1)
+		map.addCarrot(1,2)
+		map.addCarrot(1,3)
+		map.addCarrot(1,4)
+		map.addCarrot(1,5)
+		map.addCarrot(1,6)
+		
+		return new Level(2,map)
 	}
 }

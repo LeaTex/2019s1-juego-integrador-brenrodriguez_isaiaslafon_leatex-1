@@ -4,7 +4,7 @@ import tiles.*
 
 describe "tests para maps y niveles" {
 
-	test "el map tiene un tamaño de 10 x 10 con una posición de inicio y una de fin" {
+	test "el mapa tiene un tamaño de 10 x 10 con una posición de inicio y una de fin" {
 		var map = new Map(10,10)
 		map.startPoint(3,3)
 		map.endPoint(5,5)
@@ -17,7 +17,7 @@ describe "tests para maps y niveles" {
 		assert.that(map.elements().isEmpty())
 	}
 	
-	test "el map tiene 3 zanahorias" {
+	test "el mapa tiene 3 zanahorias" {
 		var map = new Map(10,10)
 		map.addCarrot(6,7)
 		map.addCarrot(7,8)
@@ -26,12 +26,28 @@ describe "tests para maps y niveles" {
 		assert.equals(map.carrots().size(), 3)	
 	}
 
-	test "el map tiene 3 paredes" {
+	test "el mapa tiene 3 paredes" {
 		var map = new Map(10,10)
 		map.addElement(new Wall(6,7))
 		map.addElement(new Wall(7,8))
 		map.addElement(new Wall(8,9))
 		
 		assert.equals(map.elements().size(), 3)	
+	}
+
+	test "el nivel N se construye en base a cierto mapa sin zanahorias" {
+		var map = new Map(10,10)
+		var level = new Level(1,map)
+		assert.equals(level.initialCarrotsAmount(), 0)
+		assert.equals(level.collectedCarrotsAmount(), 0)
+		assert.equals(level.player(), level.bunny())
+	}
+
+	test "el nivel N se construye en base a un mapa con 1 zanahoria" {
+		var map = new Map(10,10)
+		map.addCarrot(6,7)
+		var level = new Level(1,map)
+		assert.equals(level.initialCarrotsAmount(), 1)
+		assert.equals(level.collectedCarrotsAmount(), 0)
 	}
 }
