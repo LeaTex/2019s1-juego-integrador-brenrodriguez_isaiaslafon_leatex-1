@@ -92,17 +92,45 @@ object levelsList {
 	}
 	
 	method levelOne() {
-		var map = new Map(13,13)
-		map.startPoint(3,3)
-		map.endPoint(5,5)
+		var map = new Map(7,10)
+		map.startPoint(3,1)
+		map.endPoint(3,8)
 	
+		map.addCarrot(4,2)
+		map.addCarrot(4,3)
+		map.addCarrot(4,4)
+		map.addCarrot(5,2)
 		map.addCarrot(5,3)
-		map.addCarrot(2,7)
-		map.addCarrot(8,7)
 		map.addCarrot(5,4)
-		map.addCarrot(1,9)
-		map.addElement(new Wall(5,7))
-		map.addElement(new Trap(3,5))
+		map.addCarrot(6,2)
+		map.addCarrot(6,3)
+		map.addCarrot(6,4)
+
+		map.addElement(new Grass(0,0))
+		map.addElement(new Grass(0,1))
+		map.addElement(new Grass(0,5))
+		map.addElement(new Grass(0,6))
+		
+		map.addElement(new Grass(9,0))
+		map.addElement(new Grass(9,1))
+		map.addElement(new Grass(9,5))
+		map.addElement(new Grass(9,6))
+		
+		map.addElement(new Grass(3,1))
+		map.addElement(new Grass(3,2))
+		map.addElement(new Grass(3,4))
+		map.addElement(new Grass(3,5))
+		map.addElement(new Grass(4,1))
+		map.addElement(new Grass(4,5))
+		map.addElement(new Grass(5,1))
+		map.addElement(new Grass(5,5))
+		map.addElement(new Grass(6,1))
+		map.addElement(new Grass(6,5))
+		map.addElement(new Grass(5,1))
+		map.addElement(new Grass(5,2))
+		map.addElement(new Grass(5,3))
+		map.addElement(new Grass(5,4))
+		map.addElement(new Grass(5,5))
 		
 		return new Level(1,map)
 	}

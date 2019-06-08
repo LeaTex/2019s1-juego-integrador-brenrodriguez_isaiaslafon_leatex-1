@@ -13,11 +13,18 @@ class Player {
 	
 	method image() = "./bobby/bobby.png"
 	
-	method canMoveTo(nuevaPosicion) {
+	method canMoveTo(newPosition) {
 		
-		var objects = game.getObjectsIn(nuevaPosicion)	
-		return objects.isEmpty() or objects.first().canBeSteppedOn()
-	} 
+		var objects = game.getObjectsIn(newPosition)	
+		return self.isPositionInsideBoard(newPosition)
+			and (objects.isEmpty() or objects.first().canBeSteppedOn())
+	}
+	method isPositionInsideBoard(newPosition) {
+		return newPosition.x() >= 0
+			and newPosition.y() >= 0
+			and newPosition.x() < game.width()
+			and newPosition.y() < game.height()
+	}
 
 	method move(nuevaPosicion) {
 		
