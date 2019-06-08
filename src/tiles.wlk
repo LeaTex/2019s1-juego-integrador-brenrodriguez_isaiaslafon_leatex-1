@@ -7,7 +7,7 @@ class Wall {
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 
-	method image() = "spot.png"
+	method image() = "fence01.png"
 
 	method canBeSteppedOn() = false
 
@@ -29,7 +29,6 @@ class Grass {
 }
 
 
-
 class Carrot {
 	var property position
 
@@ -42,12 +41,11 @@ class Carrot {
 	method  canBeSteppedOn () = true
 	
 	method reactTo(player){
-		//level.carrots().remove(self)
+		player.removeCarrot(self)
 		game.removeVisual(self)
-		game.addVisual(hole)
+		game.addVisual(new Hole(position = self.position()))
 	}
 }
-
 
 
 class EndPoint {
@@ -57,7 +55,7 @@ class EndPoint {
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 	
-	method reactTo(){
+	method reactTo(player, level){
 		//go to next level
 	}
 }
@@ -86,7 +84,10 @@ class Trap {
 	} 
 } 
 
-object hole {
+class Hole {
+	var property position
+	constructor(x,y) = self(new Position(x,y))
+	constructor(_position) { position = _position }
 	method image() = "tomaco.png"
 }
 
