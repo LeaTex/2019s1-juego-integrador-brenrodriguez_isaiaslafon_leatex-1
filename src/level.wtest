@@ -50,4 +50,22 @@ describe "tests para maps y niveles" {
 		assert.equals(level.initialCarrotsAmount(), 1)
 		assert.equals(level.collectedCarrotsAmount(), 0)
 	}
+	
+	test "lista de niveles" {
+		assert.notThat(levelsList.levelTwo() == null)
+	}
+	
+	test "map builder full" {
+		var mapDefinition = []
+		mapDefinition.add("G")
+		
+		mapDefinition.first().words().size()
+		
+		assert.that(mapDefinition.first() == "G")
+		assert.that(mapDefinition.first().words() == ["G"])
+		
+		// var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		// assert.notThat(map == null)
+		
+	}
 }

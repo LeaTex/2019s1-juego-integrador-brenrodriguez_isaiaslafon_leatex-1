@@ -53,7 +53,7 @@ class Level {
 		map.carrots().forEach{ z => game.addVisual(z) }
 		map.elements().forEach{ e => game.addVisual(e) }
 		
-		game.addVisual(map.endPoint())	
+		game.addVisual(map.endPoint())
 		game.addVisual(bunny)
 	}
 	
@@ -84,6 +84,8 @@ object levelsList {
 	
 	method initializeLevels() {
 		levels.add(self.levelOne())
+		levels.add(self.levelTwo())
+		levels.add(self.levelThree())
 	}
 
 	method addExtraLevelForMap(aMap) {
@@ -141,17 +143,82 @@ object levelsList {
 		return new Level(1,map)
 	}
 	method levelTwo() {
-		var map = new Map(12,12)
-		map.startPoint(6,1)
-		map.endPoint(10,10)
-	
-		map.addCarrot(1,1)
-		map.addCarrot(1,2)
-		map.addCarrot(1,3)
-		map.addCarrot(1,4)
-		map.addCarrot(1,5)
-		map.addCarrot(1,6)
+		var mapDefinition = []
+		mapDefinition.add("GGG   GGG")
+		mapDefinition.add("GGG E GGG")
+		mapDefinition.add("         ")
+		mapDefinition.add(" FFFTFFF ")
+		mapDefinition.add(" FCCCCCF ")
+		mapDefinition.add(" FC C CF ")
+		mapDefinition.add(" FCCCCCF ")
+		mapDefinition.add(" FFFTFFF ")
+		mapDefinition.add("         ")
+		mapDefinition.add("GGG   GGG")
+		mapDefinition.add("GGG S GGG")
+		mapDefinition.add("GGG   GGG")
 		
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(2,map)
+	}
+
+	method levelThree() {
+		var mapDefinition = []
+		mapDefinition.add("GGG GGG")
+		mapDefinition.add("GG E GG")
+		mapDefinition.add("       ")
+		mapDefinition.add("GGG GGG")
+		mapDefinition.add("GCCTCCG")
+		mapDefinition.add("GCCTCCG")
+		mapDefinition.add("GCCTCCG")
+		mapDefinition.add("GGG GGG")
+		mapDefinition.add("GGG GGG")
+		mapDefinition.add("GG   GG")
+		mapDefinition.add("GG S GG")
+		mapDefinition.add("GG   GG")
+		
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(3,map)
+	}
+}
+
+object mapBuilder {
+	/*	S	start point
+		E	end point
+		C	carrot
+		F	fence
+		G	grass
+		T	trap
+	 */
+	var map
+
+	method buildMapFromMatrix(aMatrix) {
+		var width = aMatrix.first().length()
+		var height = aMatrix.size()
+		
+		map = new Map(width, height)
+		
+		var rows = 0 .. (height -1)
+		var columns = 0 .. (width -1)
+		
+		rows.forEach({ row => 
+			columns.forEach({ column => 
+				self.addElementAccordingTo(
+					aMatrix.get(row).charAt(column), 
+					height - 1 - row, 
+					column
+				)
+			})
+		})
+		
+		return map
+	}
+	
+	method addElementAccordingTo(char, y, x) {
+		if (char == "S") { map.startPoint(x,y) }
+		if (char == "E") { map.endPoint(x,y) }
+		if (char == "C") { map.addCarrot(x,y) }
+		if (char == "F") { map.addElement(new Fence(x,y)) }
+		if (char == "G") { map.addElement(new Grass(x,y)) }
+		if (char == "T") { map.addElement(new Trap(x,y)) }
 	}
 }
