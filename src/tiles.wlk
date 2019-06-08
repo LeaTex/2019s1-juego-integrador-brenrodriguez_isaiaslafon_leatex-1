@@ -1,14 +1,17 @@
 import wollok.game.*
 
-object fencesVisuals {
-	const horizontalFence = "./tiles/fences/horizontalFence.png"
-	const verticalFence = "./tiles/fences/verticalfence.png"
-	const leftFence = "./tiles/fences/leftFence.png"
-	const righFence = "./tiles/fences/roghtFence.png"
-	const leftUpFence = "./tiles/fences/leftUpFence.png"
-	const righUpFence = "./tiles/fences/rightUpFence.png"
-}
+class Wall {
+	var property position
+	
+	constructor() = self(game.center())
+	constructor(x,y) = self(new Position(x,y))
+	constructor(_position) { position = _position }
+    
+    method image() = "./tiles/fences/fenceHorizontal.png"
 
+	method canBeSteppedOn() = false
+
+}
 class Fence {
 	var property position
 	var fenceImage = "./tiles/fences/fenceHorizontal.png"
@@ -116,6 +119,24 @@ class Hole {
 	method reactTo(player){}
 }
 
-object counter {
+object remainingCarrotsCounter {
+	var counter
+	method set(cant) {
+	 counter = cant		
+	}
+	
+	method decrement() {
+	 counter -= counter		
+	}
+	
+	method showCounter() {
+	 	game.say(self, "Carrots: " + counter)
+	}
+	
+	method decrementAndShow() {
+		self.decrement()
+		self.showCounter()
+	}
+	
 	// Count the accumulated carrots 
 }
