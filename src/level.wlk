@@ -47,8 +47,8 @@ class Level {
 	}
 
 	method prepareGameAccordingToMap(aGame) {
-		game.height(map.boardSize().x())
-		game.width(map.boardSize().y())
+		game.width(map.boardSize().x())
+		game.height(map.boardSize().y())
 
 		map.carrots().forEach{ z => game.addVisual(z) }
 		map.elements().forEach{ e => game.addVisual(e) }
@@ -96,42 +96,48 @@ object levelsList {
 		map.startPoint(3,1)
 		map.endPoint(3,8)
 	
-		map.addCarrot(4,2)
-		map.addCarrot(4,3)
+		map.addCarrot(2,4)
+		map.addCarrot(2,5)
+		map.addCarrot(2,6)
+
+		map.addCarrot(3,4)
+		map.addCarrot(3,5)
+		map.addCarrot(3,6)
+
+		map.addCarrot(4,6)
+		map.addCarrot(4,5)
 		map.addCarrot(4,4)
-		map.addCarrot(5,2)
-		map.addCarrot(5,3)
-		map.addCarrot(5,4)
-		map.addCarrot(6,2)
-		map.addCarrot(6,3)
-		map.addCarrot(6,4)
 
 		map.addElement(new Grass(0,0))
-		map.addElement(new Grass(0,1))
-		map.addElement(new Grass(0,5))
-		map.addElement(new Grass(0,6))
+		map.addElement(new Grass(1,0))
+		map.addElement(new Grass(5,0))
+		map.addElement(new Grass(6,0))
 		
-		map.addElement(new Grass(9,0))
-		map.addElement(new Grass(9,1))
-		map.addElement(new Grass(9,5))
-		map.addElement(new Grass(9,6))
+		map.addElement(new Grass(0,9))
+		map.addElement(new Grass(1,9))
+		map.addElement(new Grass(5,9))
+		map.addElement(new Grass(6,9))
 		
-		map.addElement(new Grass(3,1))
-		map.addElement(new Grass(3,2))
-		map.addElement(new Grass(3,4))
-		map.addElement(new Grass(3,5))
-		map.addElement(new Grass(4,1))
-		map.addElement(new Grass(4,5))
-		map.addElement(new Grass(5,1))
-		map.addElement(new Grass(5,5))
-		map.addElement(new Grass(6,1))
-		map.addElement(new Grass(6,5))
-		map.addElement(new Grass(5,1))
-		map.addElement(new Grass(5,2))
-		map.addElement(new Grass(5,3))
-		map.addElement(new Grass(5,4))
-		map.addElement(new Grass(5,5))
-		
+		map.addElement(new Wall(1,3))
+		map.addElement(new Wall(1,4))
+		map.addElement(new Wall(1,5))
+		map.addElement(new Wall(1,6))
+		map.addElement(new Wall(1,7))
+
+		map.addElement(new Wall(2,3))
+		map.addElement(new Wall(2,7))
+
+		map.addElement(new Wall(3,7))
+
+		map.addElement(new Wall(4,3))
+		map.addElement(new Wall(4,7))
+
+		map.addElement(new Wall(5,3))
+		map.addElement(new Wall(5,4))
+		map.addElement(new Wall(5,5))
+		map.addElement(new Wall(5,6))
+		map.addElement(new Wall(5,7))
+
 		return new Level(1,map)
 	}
 	method levelTwo() {
