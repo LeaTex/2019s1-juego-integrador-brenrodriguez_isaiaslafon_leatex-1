@@ -26,7 +26,11 @@ class Grass {
 
 class Carrot {
 	
-	var property position = game.center()
+	var property position
+
+	constructor(x,y) {
+		position = new Position(x,y)
+	}
 
 	method image() = "spot.png"
 
@@ -36,7 +40,11 @@ class Carrot {
 
 
 
-class Endpoint {
+class EndPoint {
+	var property position
 
+	constructor(x,y) {
+		position = new Position(x,y)
+	}
 }
 

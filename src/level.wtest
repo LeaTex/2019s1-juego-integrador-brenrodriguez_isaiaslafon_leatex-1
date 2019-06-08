@@ -1,0 +1,16 @@
+import wollok.game.*
+import level.*
+
+describe "tests para mapas y niveles" {
+
+	test "el mapa tiene un tamaño de 10 x 10 con una posición de inicio y una de fin" {
+		var mapa = new Map(10,10)
+		mapa.startPoint(3,3)
+		mapa.endPoint(5,5)
+		
+		assert.equals(mapa.boardSize() , 10->10)
+		assert.equals(mapa.startPoint() , new Position(3,3))
+		assert.equals(mapa.endPoint() , new Position(5,5))
+
+	}
+}
