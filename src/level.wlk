@@ -3,7 +3,6 @@ import tiles.*
 
 /* A Map defines the initial view of a Level. It describes the size of the playground
  * and the position of the elements */
-
 class Map {
 	var boardSize
 	var startPoint

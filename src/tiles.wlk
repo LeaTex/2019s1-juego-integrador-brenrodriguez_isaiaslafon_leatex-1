@@ -1,8 +1,11 @@
 import wollok.game.*
 
 class Wall {
+	var property position
 
-	var property position = game.center()
+	constructor() = self(game.center())
+	constructor(x,y) = self(new Position(x,y))
+	constructor(_position) { position = _position }
 
 	method image() = "spot.png"
 
@@ -13,8 +16,11 @@ class Wall {
 
 
 class Grass {
+	var property position
 
-	var property position = game.center()
+	constructor() = self(game.center())
+	constructor(x,y) = self(new Position(x,y))
+	constructor(_position) { position = _position }
 
 	method image() = "spot.png"
 
@@ -25,12 +31,11 @@ class Grass {
 
 
 class Carrot {
-	
 	var property position
 
-	constructor(x,y) {
-		position = new Position(x,y)
-	}
+	constructor() = self(game.center())
+	constructor(x,y) = self(new Position(x,y))
+	constructor(_position) { position = _position }
 
 	method image() = "spot.png"
 
@@ -43,8 +48,8 @@ class Carrot {
 class EndPoint {
 	var property position
 
-	constructor(x,y) {
-		position = new Position(x,y)
-	}
+	constructor() = self(game.center())
+	constructor(x,y) = self(new Position(x,y))
+	constructor(_position) { position = _position }
 }
 

@@ -1,8 +1,12 @@
 import wollok.game.*
 
 class Player {
-	
-	var property position = game.center()
+	var property position
+
+	constructor() = self(game.center())
+	constructor(x,y) = self(new Position(x,y))
+	constructor(_position) { position = _position }
+
 	method image() = "player.png"
 	
 	method canMoveTo(nuevaPosicion) {
