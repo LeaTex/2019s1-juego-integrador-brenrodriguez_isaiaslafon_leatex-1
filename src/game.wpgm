@@ -1,6 +1,20 @@
+import wollok.game.*
+import player.*
 
 program abc {
 
-	console.println('Hello Wollok')
-
+//	CONFIG	
+	game.title("Bobby carrot")
+	game.height(10)
+	game.width(10)
+	game.ground("ground.png")
+	
+	game.addVisualCharacter(player)
+	game.addVisualIn(new Caja(), game.at(5,5))
+	game.addVisualIn(new Caja(), game.at(2,7))
+	game.addVisualIn(new Caja(), game.at(8,7))
+	game.addVisualIn(new Caja(), game.at(5,4))
+	game.addVisualIn(new Caja(), game.at(1,9))
+	
+	game.start()	
 }
