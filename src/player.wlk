@@ -2,6 +2,7 @@ import wollok.game.*
 
 class Player {
 	var property position
+	var property accumulatedCarrots= []
 	var health = 100
 	var isAlive = true
 	
@@ -17,7 +18,7 @@ class Player {
 		var objects = game.getObjectsIn(nuevaPosicion)	
 		return objects.isEmpty() or objects.first().canBeSteppedOn()
 	} 
-	
+
 	method move(nuevaPosicion) {
 		
 		if (self.canMoveTo(nuevaPosicion)) {
@@ -34,4 +35,6 @@ class Player {
 //		isAlive = health > 0
 		game.say(self, "estoy reaccionando")	
 	}
+	
+	method removeCarrot(carrot) = self.accumulatedCarrots().remove(carrot)
 }

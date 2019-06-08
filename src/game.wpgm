@@ -19,7 +19,7 @@ program BobbyCarrot {
 	keyboard.a().onPressDo { player.move(player.position().left(1)) }
 	keyboard.d().onPressDo { player.move(player.position().right(1)) }
 		
-	game.whenCollideDo(player, {element => element.reactTo(player, level)})		
+	game.whenCollideDo(player, {element => element.reactTo(player)})		
 		
 	game.start()	
 }

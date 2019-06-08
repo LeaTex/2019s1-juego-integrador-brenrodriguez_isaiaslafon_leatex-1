@@ -37,13 +37,13 @@ class Level {
 	const levelNumber
 	const map
 	const bunny
-	var property carrotsOnBoard = []
+	var carrotsOnBoard = []
 	
 	constructor(_level, _map) {
 		levelNumber = _level
 		map = _map
 		bunny = new Player(map.startPoint())
-		self.carrotsOnBoard().addAll(map.carrots())
+		carrotsOnBoard.addAll(map.carrots())
 	}
 
 	method prepareGameAccordingToMap(aGame) {
@@ -63,7 +63,7 @@ class Level {
 	method initialCarrotsAmount() { return map.carrots().size() }
 	
 	method collectedCarrotsAmount() {
-		return self.initialCarrotsAmount() - self.carrotsOnBoard().size()
+		return self.initialCarrotsAmount() - carrotsOnBoard.size()
 	}
 }
 

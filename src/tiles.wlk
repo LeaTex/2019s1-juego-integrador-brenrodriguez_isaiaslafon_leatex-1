@@ -40,10 +40,10 @@ class Carrot {
 
 	method  canBeSteppedOn () = true
 	
-	method reactTo(player, level){
-		level.initialCarrotsAmount().remove(self)
+	method reactTo(player){
+		player.removeCarrot(self)
 		game.removeVisual(self)
-		game.addVisualIn(hole, self.position())
+		game.addVisual(new Hole(position = self.position()))
 	}
 }
 
@@ -84,8 +84,10 @@ class Trap {
 	} 
 } 
 
-object hole {
+class Hole {
 	var property position
+	constructor(x,y) = self(new Position(x,y))
+	constructor(_position) { position = _position }
 	method image() = "tomaco.png"
 }
 
