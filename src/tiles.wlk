@@ -44,6 +44,7 @@ class Carrot {
 		player.removeCarrot(self)
 		game.removeVisual(self)
 		game.addVisual(new Hole(position = self.position()))
+		game.addVisual(player)
 	}
 }
 
@@ -95,6 +96,8 @@ class Hole {
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 	method image() = "./tiles/ground/groundHole.png"
+	method  canBeSteppedOn () = true 
+	method reactTo(player){}
 }
 
 object counter {
