@@ -120,7 +120,9 @@ class Hole {
 }
 
 object remainingCarrotsCounter {
-	var counter
+	
+	var property position = game.origin()
+	var counter = 0
 	method set(cant) {
 	 counter = cant		
 	}
@@ -132,7 +134,7 @@ object remainingCarrotsCounter {
 	method showCounter() {
 	 	game.say(self, "Carrots: " + counter)
 	}
-	
+	method image() = "./tiles/grass/middleGrass.png"
 	method decrementAndShow() {
 		self.decrement()
 		self.showCounter()

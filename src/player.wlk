@@ -44,4 +44,5 @@ class Player {
 	}
 	
 	method removeCarrot(carrot) = self.accumulatedCarrots().remove(carrot)
+	method reactTo(player) { }
 }

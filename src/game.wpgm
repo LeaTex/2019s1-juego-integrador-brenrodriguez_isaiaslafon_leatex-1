@@ -8,10 +8,9 @@ program BobbyCarrot {
 //	CONFIG	
 	game.title("Bobby carrot")
 	game.ground("./tiles/ground/ground.png")
-	
 	var level = levelsList.levelOne()
 	level.prepareGameAccordingToMap(game)
-
+	game.addVisual(remainingCarrotsCounter)
 	var player = level.player()
 	
 	keyboard.w().onPressDo { player.move(player.position().up(1)) }
