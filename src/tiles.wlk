@@ -36,7 +36,7 @@ class Carrot {
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 
-	method image() = "spot.png"
+	method image() = "./tiles/ground/carrot.png"
 
 	method  canBeSteppedOn () = true
 	
@@ -50,10 +50,16 @@ class Carrot {
 
 class EndPoint {
 	var property position
-
+	var image = "./tiles/points/endPointOff.png"
 	constructor() = self(game.center())
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
+	
+	method image() = image 
+	
+	method endPointOn() {
+	image = "./tiles/points/endPointOff.png"
+	}
 	
 	method reactTo(player, level){
 		//go to next level
@@ -68,7 +74,7 @@ class Trap {
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 	 
-	method image() = if (activated) "corn_adult.png" else "corn_baby.png" 
+	method image() = if (activated) "./tiles/spikes/spikesUp.png" else "./tiles/spikes/spikesDown.png" 
 	 
 	method  canBeSteppedOn () = true 
 	 
@@ -88,7 +94,7 @@ class Hole {
 	var property position
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
-	method image() = "tomaco.png"
+	method image() = "./tiles/ground/groundHole.png"
 }
 
 object counter {

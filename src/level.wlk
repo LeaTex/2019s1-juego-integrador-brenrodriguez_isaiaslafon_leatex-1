@@ -96,7 +96,7 @@ object levelsList {
 		map.startPoint(3,3)
 		map.endPoint(5,5)
 	
-		map.addCarrot(5,5)
+		map.addCarrot(5,3)
 		map.addCarrot(2,7)
 		map.addCarrot(8,7)
 		map.addCarrot(5,4)
