@@ -65,6 +65,10 @@ class Level {
 	method collectedCarrotsAmount() {
 		return self.initialCarrotsAmount() - carrotsOnBoard.size()
 	}
+	
+	method allCollected() {
+		return self.collectedCarrotsAmount() == self.initialCarrotsAmount()
+	}
 }
 
 /* A WKO with a hardcoded list of level to play */

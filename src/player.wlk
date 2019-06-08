@@ -11,7 +11,7 @@ class Player {
 	constructor(_position) { position = _position }
 
 	
-	method image() = "player.png"
+	method image() = "./bobby/bobby.png"
 	
 	method canMoveTo(nuevaPosicion) {
 		
