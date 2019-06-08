@@ -7,7 +7,7 @@ program BobbyCarrot {
 
 //	CONFIG	
 	game.title("Bobby carrot")
-	game.ground("ground.png")
+	game.ground("./tiles/ground/ground.png")
 	
 	var level = levelsList.levelOne()
 	level.prepareGameAccordingToMap(game)
