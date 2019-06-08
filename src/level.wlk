@@ -51,6 +51,8 @@ class Level {
 		game.width(map.boardSize().y())
 
 		map.carrots().forEach{ z => game.addVisual(z) }
+		map.elements().forEach{ e => game.addVisual(e) }
+		
 		game.addVisual(map.endPoint())	
 		game.addVisual(bunny)
 	}
