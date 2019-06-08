@@ -79,6 +79,8 @@ object levelsList {
 		map.addCarrot(8,7)
 		map.addCarrot(5,4)
 		map.addCarrot(1,9)
+		map.addElement(new Wall(5,7))
+		map.addElement(new Trap(3,5))
 		
 		return new Level(1,map)
 	}
