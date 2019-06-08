@@ -29,7 +29,6 @@ class Grass {
 }
 
 
-
 class Carrot {
 	var property position
 
@@ -41,13 +40,12 @@ class Carrot {
 
 	method  canBeSteppedOn () = true
 	
-	method reactTo(player){
-		//level.carrots().remove(self)
+	method reactTo(player, level){
+		level.initialCarrotsAmount().remove(self)
 		game.removeVisual(self)
-		game.addVisual(hole)
+		game.addVisualIn(hole, self.position())
 	}
 }
-
 
 
 class EndPoint {
@@ -57,12 +55,13 @@ class EndPoint {
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 	
-	method reactTo(){
+	method reactTo(player, level){
 		//go to next level
 	}
 }
 
 object hole {
+	var property position
 	method image() = "tomaco.png"
 }
 
