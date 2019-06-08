@@ -64,6 +64,7 @@ class Carrot {
 		game.removeVisual(self)
 		game.addVisual(new Hole(position = self.position()))
 		game.addVisual(player)
+		remainingCarrotsCounter.decrementAndShow()
 	}
 }
 
@@ -121,14 +122,14 @@ class Hole {
 
 object remainingCarrotsCounter {
 	
-	var property position = game.origin()
+	var property position = new Position(-1, -1)
 	var counter = 0
 	method set(cant) {
 	 counter = cant		
 	}
 	
 	method decrement() {
-	 counter -= counter		
+	 counter -= 1
 	}
 	
 	method showCounter() {
