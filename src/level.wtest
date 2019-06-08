@@ -2,36 +2,36 @@ import wollok.game.*
 import level.*
 import tiles.*
 
-describe "tests para mapas y niveles" {
+describe "tests para maps y niveles" {
 
-	test "el mapa tiene un tamaño de 10 x 10 con una posición de inicio y una de fin" {
-		var mapa = new Map(10,10)
-		mapa.startPoint(3,3)
-		mapa.endPoint(5,5)
+	test "el map tiene un tamaño de 10 x 10 con una posición de inicio y una de fin" {
+		var map = new Map(10,10)
+		map.startPoint(3,3)
+		map.endPoint(5,5)
 		
-		assert.equals(mapa.boardSize().x() , 10)
-		assert.equals(mapa.boardSize().y() , 10)
-		assert.equals(mapa.startPoint() , new Position(3,3))
-		assert.equals(mapa.endPoint().position() , new Position(5,5))
-		assert.that(mapa.carrots().isEmpty())
-		assert.that(mapa.elements().isEmpty())
+		assert.equals(map.boardSize().x() , 10)
+		assert.equals(map.boardSize().y() , 10)
+		assert.equals(map.startPoint() , new Position(3,3))
+		assert.equals(map.endPoint().position() , new Position(5,5))
+		assert.that(map.carrots().isEmpty())
+		assert.that(map.elements().isEmpty())
 	}
 	
-	test "el mapa tiene 3 zanahorias" {
-		var mapa = new Map(10,10)
-		mapa.addCarrot(6,7)
-		mapa.addCarrot(7,8)
-		mapa.addCarrot(8,9)
+	test "el map tiene 3 zanahorias" {
+		var map = new Map(10,10)
+		map.addCarrot(6,7)
+		map.addCarrot(7,8)
+		map.addCarrot(8,9)
 		
-		assert.equals(mapa.carrots().size(), 3)	
+		assert.equals(map.carrots().size(), 3)	
 	}
 
-	test "el mapa tiene 3 paredes" {
-		var mapa = new Map(10,10)
-		mapa.addElement(new Wall(6,7))
-		mapa.addElement(new Wall(7,8)
-		mapa.addElement(new Wall(8,9)
+	test "el map tiene 3 paredes" {
+		var map = new Map(10,10)
+		map.addElement(new Wall(6,7))
+		map.addElement(new Wall(7,8))
+		map.addElement(new Wall(8,9))
 		
-		assert.equals(mapa.elements().size(), 3)	
+		assert.equals(map.elements().size(), 3)	
 	}
 }
