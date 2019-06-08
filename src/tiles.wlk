@@ -1,14 +1,30 @@
 import wollok.game.*
 
+object fencesVisuals {
+	const horizontalFence = "./tiles/fences/horizontalFence.png"
+	const verticalFence = "./tiles/fences/verticalfence.png"
+	const leftFence = "./tiles/fences/leftFence.png"
+	const righFence = "./tiles/fences/roghtFence.png"
+	const leftUpFence = "./tiles/fences/leftUpFence.png"
+	const righUpFence = "./tiles/fences/rightUpFence.png"
+}
+
 class Fence {
 	var property position
-
+	var fenceImage = "./tiles/fences/fenceHorizontal.png"
 	constructor() = self(game.center())
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 
-	method image() = "./tiles/fences/fenceHorizontal.png"
+	method image() = fenceImage
 
+	method showHorizontal() = "./tiles/fences/horizontalFence.png"
+	method showVertical() = "./tiles/fences/verticalfence.png"
+	method showBottomLeft() = "./tiles/fences/leftFence.png"
+	method showBottomRigh() = "./tiles/fences/roghtFence.png"
+	method showTopLeftUp() = "./tiles/fences/leftUpFence.png"
+	method showTopRighUp() = "./tiles/fences/rightUpFence.png"
+	
 	method canBeSteppedOn() = false
 
 }
@@ -96,7 +112,7 @@ class Hole {
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 	method image() = "./tiles/ground/groundHole.png"
-	method  canBeSteppedOn () = true 
+	method canBeSteppedOn () = true 
 	method reactTo(player){}
 }
 
