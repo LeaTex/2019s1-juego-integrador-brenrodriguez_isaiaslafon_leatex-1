@@ -1,6 +1,11 @@
+import wollok.game.*
+import tiles.*
 
 test "testX" {
 
-	assert.that(true)
+	var player = new Player(position = new Position(10,10))
+	var wall = new Wall(position = game.at(10,11))
+	assert.notThat(wall.canBeSteppedOn())
+	//assert.notThat(player.canMoveTo(wall.position()))
 
 }

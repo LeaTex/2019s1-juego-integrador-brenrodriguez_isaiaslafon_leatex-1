@@ -60,6 +60,30 @@ class EndPoint {
 	}
 }
 
+class Trap { 
+	var property activated = false 
+	var property position 
+	 
+	constructor() = self(game.center())
+	constructor(x,y) = self(new Position(x,y))
+	constructor(_position) { position = _position }
+	 
+	method image() = if (activated) "corn_adult.png" else "corn_baby.png" 
+	 
+	method  canBeSteppedOn () = true 
+	 
+	 
+	method reactTo(player) { 
+		 
+		if (self.activated()) { 
+			game.say(self, "activada") 
+			player.receivedDamage()			 
+		} 
+		 
+		self.activated(true) 
+	} 
+} 
+
 object hole {
 	var property position
 	method image() = "tomaco.png"
