@@ -6,16 +6,28 @@ program abc {
 
 //	CONFIG	
 	game.title("Bobby carrot")
-	game.height(20)
-	game.width(20)
+	game.height(15)
+	game.width(15)
 	game.ground("ground.png")
 	
-	game.addVisualCharacter(player)
-	game.addVisualIn(new Carrot(), game.at(5,5))
-	game.addVisualIn(new Carrot(), game.at(2,7))
-	game.addVisualIn(new Carrot(), game.at(8,7))
-	game.addVisualIn(new Carrot(), game.at(5,4))
-	game.addVisualIn(new Carrot(), game.at(1,9))
+	var carrots = []
 	
+	carrots.add(new Carrot(position = game.at(5,5)))
+	carrots.add(new Carrot(position = game.at(2,7)))
+	carrots.add(new Carrot(position = game.at(8,7)))
+	carrots.add(new Carrot(position = game.at(5,4)))
+	carrots.add(new Carrot(position =  game.at(1,9)))
+
+	carrots.forEach{ z => game.addVisual(z) }
+		
+	var player = new Player(position = game.origin())
+	
+	game.addVisual(player)
+	
+	keyboard.w().onPressDo { player.move(player.position().up(1)) }
+	keyboard.s().onPressDo { player.move(player.position().down(1)) }
+	keyboard.a().onPressDo { player.move(player.position().left(1)) }
+	keyboard.d().onPressDo { player.move(player.position().right(1)) }
+		
 	game.start()	
 }
