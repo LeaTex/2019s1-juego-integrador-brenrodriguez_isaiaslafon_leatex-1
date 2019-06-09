@@ -1,18 +1,5 @@
 import wollok.game.*
 
-class Wall {
-	var property position
-	
-	constructor() = self(game.center())
-	constructor(x,y) = self(new Position(x,y))
-	constructor(_position) { position = _position }
-    
-    method image() = "./tiles/fences/fenceHorizontal.png"
-
-	method canBeSteppedOn() = false
-
-}
-
 class Fence {
 	var property position
 	var property image
