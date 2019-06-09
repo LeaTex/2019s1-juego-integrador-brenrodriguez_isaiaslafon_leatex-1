@@ -96,7 +96,7 @@ object levelsList {
 	method levelOne() {
 		var mapDefinition = []
 		mapDefinition.add("GG   GG")
-		mapDefinition.add("   E   ")
+		mapDefinition.add("  FE   ")
 		mapDefinition.add(" 12223 ")
 		mapDefinition.add(" 4CCC6 ")
 		mapDefinition.add(" 4CCC6 ")
@@ -189,7 +189,7 @@ object mapBuilder {
 		if (char == "S") { map.startPoint(x,y) }
 		if (char == "E") { map.endPoint(x,y) }
 		if (char == "C") { map.addCarrot(x,y) }
-		if (char == "F") { map.addElement(new Fence(x,y,fenceType.horizontal())) }
+		if (char == "F") { map.addElement(new Fence(x,y)) }
 		if (char == "G") { map.addElement(new Grass(x,y)) }
 		if (char == "T") { map.addElement(new Trap(x,y)) }
 		

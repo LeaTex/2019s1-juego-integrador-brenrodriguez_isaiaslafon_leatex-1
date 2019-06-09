@@ -4,13 +4,15 @@ class Fence {
 	var property position
 	var property image
 	
-	constructor() = self(game.center(), "./tiles/grass/lonelyGrass.png")
-	constructor(x,y, _image) = self(new Position(x,y), _image)
-	constructor(_position, _image) { 
-		position = _position 
+	constructor() = self(game.center().x(), game.center().y(), fenceType.lonelyGrass())
+	
+	constructor(x,y) =	self(x,y,fenceType.lonelyGrass())
+	
+	constructor(x,y, _image) { 
+		position =  new Position(x,y)
 		image = _image
 	}
-	
+		
 	method canBeSteppedOn() = false
 }
 
@@ -21,6 +23,7 @@ object fenceType {
 	method bottomRight() =  "./tiles/fences/bottomRightFence.png"
 	method topLeft()  =  "./tiles/fences/topLeftFence.png"
 	method topRight()  =  "./tiles/fences/topRightFence.png"
+	method lonelyGrass() = "./tiles/grass/lonelyGrass.png"
 }
 
 class Grass {
