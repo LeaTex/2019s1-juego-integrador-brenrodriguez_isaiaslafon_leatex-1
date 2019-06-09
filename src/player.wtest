@@ -1,11 +1,25 @@
 import wollok.game.*
 import tiles.*
+import level.*
 
-test "testX" {
-
-	//var player = new Player(position = new Position(10,10))
-	var fence = new Fence(new Position(10,11), fenceType.horizontal())
-	assert.notThat(fence.canBeSteppedOn())
-	//assert.notThat(player.canMoveTo(wall.position()))
-
+describe "Test del player" {
+	test "El jugador se puede mover" {
+	
+		var player = new Player(position = new Position(10,10))
+		var fence = new Fence(new Position(10,11), fenceType.horizontal())
+		assert.notThat(fence.canBeSteppedOn())
+		assert.notThat(player.canMoveTo(fence.position()))
+	
+	}
+	
+	//WIP
+	test "El jugador esta dentro de la pantalla" {
+		
+		var map = new Map(10,10)
+		map.startPoint(3,3)
+		map.endPoint(5,5)
+		var player = new Player(position = new Position(10,10))
+	
+		assert.notThat(player.isPositionInsideBoard(new Position(10,10)))
+	}
 }
