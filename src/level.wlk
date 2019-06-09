@@ -115,11 +115,11 @@ object levelsList {
 			
 		mapDefinition.add("GGG E GGG")
 		mapDefinition.add("         ")
-		mapDefinition.add(" FFFTFFF ")
-		mapDefinition.add(" FCCCCCF ")
-		mapDefinition.add(" FC C CF ")
-		mapDefinition.add(" FCCCCCF ")
-		mapDefinition.add(" FFFTFFF ")
+		mapDefinition.add(" 122T2F3 ")
+		mapDefinition.add(" 4CCCCC6 ")
+		mapDefinition.add(" 4C C C6 ")
+		mapDefinition.add(" 4CCCCC6 ")
+		mapDefinition.add(" 789T789 ")
 		mapDefinition.add("         ")
 		mapDefinition.add("GGG   GGG")
 		mapDefinition.add("GGG S GGG")
@@ -189,7 +189,7 @@ object mapBuilder {
 		if (char == "S") { map.startPoint(x,y) }
 		if (char == "E") { map.endPoint(x,y) }
 		if (char == "C") { map.addCarrot(x,y) }
-		if (char == "F") { map.addElement(new Fence(x,y)) }
+		if (char == "F") { map.addElement(new Fence(x,y,fenceType.horizontal())) }
 		if (char == "G") { map.addElement(new Grass(x,y)) }
 		if (char == "T") { map.addElement(new Trap(x,y)) }
 		
