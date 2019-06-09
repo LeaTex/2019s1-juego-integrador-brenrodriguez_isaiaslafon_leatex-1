@@ -82,9 +82,11 @@ class EndPoint {
 	image = "./tiles/points/endPointOff.png"
 	}
 	
-	method reactTo(player, level){
-		//go to next level
+	method reactTo(player){
+		//go to next levelimage
 	}
+	
+	method  canBeSteppedOn () = true
 }
 
 class Trap { 
@@ -99,11 +101,9 @@ class Trap {
 	 
 	method  canBeSteppedOn () = true 
 	 
-	 
 	method reactTo(player) { 
 		 
 		if (self.activated()) { 
-			game.say(self, "activada") 
 			player.receivedDamage()			 
 		} 
 		 
@@ -136,6 +136,7 @@ object remainingCarrotsCounter {
 	 	game.say(self, "Carrots: " + counter)
 	}
 	method image() = "./tiles/grass/middleGrass.png"
+	
 	method decrementAndShow() {
 		self.decrement()
 		self.showCounter()
