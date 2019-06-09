@@ -28,9 +28,9 @@ describe "tests para maps y niveles" {
 
 	test "el mapa tiene 3 paredes" {
 		var map = new Map(10,10)
-		map.addElement(new Fence(6,7))
-		map.addElement(new Fence(7,8))
-		map.addElement(new Fence(8,9))
+		map.addElement(new Fence(new Position(6,7), fenceType.horizontal()))
+		map.addElement(new Fence(new Position(7,8), fenceType.horizontal()))
+		map.addElement(new Fence(new Position(8,9), fenceType.horizontal()))
 		
 		assert.equals(map.elements().size(), 3)	
 	}
