@@ -122,7 +122,11 @@ object remainingCarrotsCounter {
 	}
 	
 	method showCounter() {
-	 	game.say(self, "Carrots: " + counter)
+	 	game.onTick(100, "show counter", { 
+   	    game.say(self, "Carrots: " + counter)
+  		game.removeTickEvent("show counter")
+	})
+	
 	}
 	method image() = "./tiles/grass/middleGrass.png"
 	

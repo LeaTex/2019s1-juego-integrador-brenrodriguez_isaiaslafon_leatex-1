@@ -3,9 +3,9 @@ import tiles.*
 
 test "testX" {
 
-	var player = new Player(position = new Position(10,10))
-	var wall = new Wall(position = game.at(10,11))
-	assert.notThat(wall.canBeSteppedOn())
+	//var player = new Player(position = new Position(10,10))
+	var fence = new Fence(new Position(10,11), fenceType.horizontal())
+	assert.notThat(fence.canBeSteppedOn())
 	//assert.notThat(player.canMoveTo(wall.position()))
 
 }
