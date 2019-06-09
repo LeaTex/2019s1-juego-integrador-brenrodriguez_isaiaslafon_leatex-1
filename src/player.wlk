@@ -3,6 +3,7 @@ import wollok.game.*
 class Player {
 	var property position
 	var property accumulatedCarrots= []
+	var image = "./bobby/bobby.png"
 	var health = 100
 	
 	constructor() = self(game.center())
@@ -10,7 +11,9 @@ class Player {
 	constructor(_position) { position = _position }
 
 	
-	method image() = "./bobby/bobby.png"
+	method image() = image
+	
+	method showDead() { image ="./bobby/deadBobby.png" }
 	
 	method canMoveTo(newPosition) {
 		
@@ -45,7 +48,7 @@ class Player {
 		}
 	}
 	
-	method removeCarrot(carrot) = self.accumulatedCarrots().remove(carrot)
+	method removeCarrot(carrot) { self.accumulatedCarrots().remove(carrot)	}
 	
 	method reactTo(player) { }
 }

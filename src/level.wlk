@@ -96,7 +96,7 @@ object levelsList {
 	method levelOne() {
 		var mapDefinition = []
 		mapDefinition.add("GG   GG")
-		mapDefinition.add("  FE   ")
+		mapDefinition.add("   E   ")
 		mapDefinition.add(" 12223 ")
 		mapDefinition.add(" 4CCC6 ")
 		mapDefinition.add(" 4CCC6 ")
