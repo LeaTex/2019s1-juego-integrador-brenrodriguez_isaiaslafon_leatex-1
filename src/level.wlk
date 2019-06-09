@@ -94,8 +94,6 @@ object levelsList {
 	}
 	
 	method levelOne() {
-		var map = new Map(7,10)
-		
 		var mapDefinition = []
 		mapDefinition.add("GG   GG")
 		mapDefinition.add("   E   ")
