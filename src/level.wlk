@@ -95,56 +95,26 @@ object levelsList {
 	
 	method levelOne() {
 		var map = new Map(7,10)
-		map.startPoint(3,1)
-		map.endPoint(3,8)
-	
-		map.addCarrot(2,4)
-		map.addCarrot(2,5)
-		map.addCarrot(2,6)
-
-		map.addCarrot(3,4)
-		map.addCarrot(3,5)
-		map.addCarrot(3,6)
-
-		map.addCarrot(4,6)
-		map.addCarrot(4,5)
-		map.addCarrot(4,4)
-
-		map.addElement(new Grass(0,0))
-		map.addElement(new Grass(1,0))
-		map.addElement(new Grass(5,0))
-		map.addElement(new Grass(6,0))
 		
-		map.addElement(new Grass(0,9))
-		map.addElement(new Grass(1,9))
-		map.addElement(new Grass(5,9))
-		map.addElement(new Grass(6,9))
-		
-		map.addElement(new Wall(1,3))
-		map.addElement(new Wall(1,4))
-		map.addElement(new Wall(1,5))
-		map.addElement(new Wall(1,6))
-		map.addElement(new Wall(1,7))
-
-		map.addElement(new Wall(2,3))
-		map.addElement(new Wall(2,7))
-
-		map.addElement(new Wall(3,7))
-
-		map.addElement(new Wall(4,3))
-		map.addElement(new Wall(4,7))
-
-		map.addElement(new Wall(5,3))
-		map.addElement(new Wall(5,4))
-		map.addElement(new Wall(5,5))
-		map.addElement(new Wall(5,6))
-		map.addElement(new Wall(5,7))
+		var mapDefinition = []
+		mapDefinition.add("GG   GG")
+		mapDefinition.add("   E   ")
+		mapDefinition.add(" 12223 ")
+		mapDefinition.add(" 4CCC6 ")
+		mapDefinition.add(" 4CCC6 ")
+		mapDefinition.add(" 4CCC6 ")
+		mapDefinition.add(" 73 19 ")
+		mapDefinition.add("       ")
+		mapDefinition.add("   S   ")
+		mapDefinition.add("GG   GG")
+					 
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
 
 		return new Level(1,map)
 	}
 	method levelTwo() {
 		var mapDefinition = []
-		mapDefinition.add("GGG   GGG")
+			
 		mapDefinition.add("GGG E GGG")
 		mapDefinition.add("         ")
 		mapDefinition.add(" FFFTFFF ")
@@ -185,9 +155,13 @@ object mapBuilder {
 	/*	S	start point
 		E	end point
 		C	carrot
-		F	fence
+		F	default fence 
 		G	grass
 		T	trap
+		Fences:
+		1 2 3 = top left, horizontal and top right. 
+		4   6 = vertical fence
+		7 8 9 = bottom left, horizontal and bottom right
 	 */
 	var map
 
@@ -220,5 +194,13 @@ object mapBuilder {
 		if (char == "F") { map.addElement(new Fence(x,y)) }
 		if (char == "G") { map.addElement(new Grass(x,y)) }
 		if (char == "T") { map.addElement(new Trap(x,y)) }
+		
+		if (char == "1") { map.addElement(new Fence(x,y, fenceType.topLeft())) }
+		if (char == "3") {map.addElement(new Fence(x,y,fenceType.topRight())) }
+		if (char == "7") { map.addElement(new Fence(x,y,fenceType.bottomLeft())) }
+		if (char == "9") { map.addElement(new Fence(x,y,fenceType.bottomRight())) }
+		if (char == "2" or char == "8") { map.addElement(new Fence(x,y,fenceType.horizontal())) }
+		if (char == "4" or char == "6") { map.addElement(new Fence(x,y,fenceType.vertical())) }
+		
 	}
 }

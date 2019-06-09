@@ -12,27 +12,29 @@ class Wall {
 	method canBeSteppedOn() = false
 
 }
+
 class Fence {
 	var property position
-	var fenceImage = "./tiles/fences/fenceHorizontal.png"
-	constructor() = self(game.center())
-	constructor(x,y) = self(new Position(x,y))
-	constructor(_position) { position = _position }
-
-	method image() = fenceImage
-
-	method showHorizontal() = "./tiles/fences/horizontalFence.png"
-	method showVertical() = "./tiles/fences/verticalfence.png"
-	method showBottomLeft() = "./tiles/fences/leftFence.png"
-	method showBottomRigh() = "./tiles/fences/roghtFence.png"
-	method showTopLeftUp() = "./tiles/fences/leftUpFence.png"
-	method showTopRighUp() = "./tiles/fences/rightUpFence.png"
+	var property image
+	
+	constructor() = self(game.center(), "./tiles/grass/lonelyGrass.png")
+	constructor(x,y, _image) = self(new Position(x,y), _image)
+	constructor(_position, _image) { 
+		position = _position 
+		image = _image
+	}
 	
 	method canBeSteppedOn() = false
-
 }
 
-
+object fenceType {
+	method horizontal() = "./tiles/fences/horizontalFence.png" 
+	method vertical() = "./tiles/fences/verticalFence.png" 
+	method bottomLeft()  =  "./tiles/fences/bottomLeftFence.png"
+	method bottomRight() =  "./tiles/fences/bottomRightFence.png"
+	method topLeft()  =  "./tiles/fences/topLeftFence.png"
+	method topRight()  =  "./tiles/fences/topRightFence.png"
+}
 
 class Grass {
 	var property position
