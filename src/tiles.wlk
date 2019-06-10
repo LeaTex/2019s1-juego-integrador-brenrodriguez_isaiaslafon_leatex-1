@@ -57,9 +57,9 @@ class Grass {
 }
 
 class Grabable {
-	var property position
-	var property image
-
+	const property position
+	const property image
+	
 	constructor(x,y, _image) { 
 		position = new Position (x,y)
 		image = _image
@@ -71,7 +71,7 @@ class Grabable {
 		player.removeCarrot(self)
 		game.removeVisual(self)
 		game.addVisual(new Hole(position = self.position()))
-		game.addVisual(player)
+		player.reDraw()
 		remainingCarrotsCounter.decrementAndShow()
 	}
 }
@@ -80,8 +80,6 @@ class Grabable {
 /*class Carrot2 inherits Grabable (1,0,carrotIMage) {
 	
 }*/
-
-
 
 class Carrot {
 	var property position
@@ -249,6 +247,4 @@ object visual {
 	method get(tile) {
 		type.getOrElse (tile,{=> type.get("middleGrass")})
 	}
-	
-	
 }
