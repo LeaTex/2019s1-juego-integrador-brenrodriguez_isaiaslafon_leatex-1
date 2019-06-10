@@ -27,7 +27,7 @@ object fenceType {
 }
 
 class Grass {
-	var property position
+	const property position
 
 	constructor() = self(game.center())
 	constructor(x,y) = self(new Position(x,y))
@@ -38,6 +38,32 @@ class Grass {
 	method canBeSteppedOn() = false
 
 }
+
+class Grabable {
+	var property position
+	var property image
+
+	constructor(x,y, _image) { 
+		position = new Position (x,y)
+		image = _image
+	}
+
+	method  canBeSteppedOn () = true
+	
+	method reactTo(player){
+		player.removeCarrot(self)
+		game.removeVisual(self)
+		game.addVisual(new Hole(position = self.position()))
+		game.addVisual(player)
+		remainingCarrotsCounter.decrementAndShow()
+	}
+}
+
+//To implement
+/*class Carrot2 inherits Grabable (1,0,carrotIMage) {
+	
+}*/
+
 
 
 class Carrot {
@@ -55,7 +81,7 @@ class Carrot {
 		player.removeCarrot(self)
 		game.removeVisual(self)
 		game.addVisual(new Hole(position = self.position()))
-		game.addVisual(player)
+		player.reDraw()
 		remainingCarrotsCounter.decrementAndShow()
 	}
 }

@@ -48,7 +48,10 @@ class Player {
 		}
 	}
 	
-	method removeCarrot(carrot) { self.accumulatedCarrots().remove(carrot)	}
+	method removeCarrot(carrot) { self.accumulatedCarrots().remove(carrot) }
 	
-	method reactTo(player) { }
+	method reDraw() {
+		game.removeVisual(self)
+		game.addVisual(self)
+	}
 }
