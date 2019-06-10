@@ -8,7 +8,9 @@ program BobbyCarrot {
 //	CONFIG	
 	game.title("Bobby carrot")
 	game.ground("./tiles/ground/ground.png")
-	var level = levelsList.levelTwo()
+	var level = levelsList.levelThree()
+	levelsList.currentLevel(level)
+	
 	level.prepareGameAccordingToMap(game)
 	game.addVisual(remainingCarrotsCounter)
 	var player = level.player()
@@ -18,8 +20,8 @@ program BobbyCarrot {
 	keyboard.s().onPressDo { player.move(player.position().down(1)) }
 	keyboard.a().onPressDo { player.move(player.position().left(1)) }
 	keyboard.d().onPressDo { player.move(player.position().right(1)) }
-		
-	//game.whenCollideDo(player, {element => element.reactTo(player)})		
+	keyboard.any().onPressDo { if (player.health() == 0)  game.stop() }
+	
 	remainingCarrotsCounter.showCounter()
 	
 	game.start()
