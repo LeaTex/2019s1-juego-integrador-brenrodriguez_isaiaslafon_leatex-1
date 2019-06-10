@@ -1,12 +1,13 @@
 import wollok.game.*
+import level.*
 
 class Player {
 	var property position
 	var property accumulatedCarrots= []
 	var image = "./bobby/bobby.png"
-	var health = 100
+	var property health = 100
 	
-	constructor() = self(game.center())
+	constructor() = self(new Position(0,0))
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 
@@ -25,8 +26,8 @@ class Player {
 	method isPositionInsideBoard(newPosition) {
 		return newPosition.x() >= 0
 			and newPosition.y() >= 0
-			and newPosition.x() < game.width()
-			and newPosition.y() < game.height()
+			and newPosition.x() < levelsList.currentLevel().map().boardSize().x()
+			and newPosition.y() < levelsList.currentLevel().map().boardSize().y()
 	}
 
 	method move(nuevaPosicion) {
@@ -41,11 +42,7 @@ class Player {
 	}	
 	
 	method receivedDamage() {
-		health -= 50
-		
-		if (health <= 0) {
-			game.stop()
-		}
+		health = 0
 	}
 	
 	method removeCarrot(carrot) { self.accumulatedCarrots().remove(carrot) }

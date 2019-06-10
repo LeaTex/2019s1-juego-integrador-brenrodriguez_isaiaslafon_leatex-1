@@ -55,9 +55,13 @@ class Level {
 		
 		game.addVisual(map.endPoint())
 		game.addVisual(bunny)
+		
 	}
 	
+	method map() = map
+	
 	method bunny() { return bunny }
+	
 	method player() { return self.bunny() }
 	
 	method initialCarrotsAmount() { return map.carrots().size() }
@@ -74,12 +78,14 @@ class Level {
 /* A WKO with a hardcoded list of level to play */
 object levelsList {
 	var levels = []
+	var property currentLevel = self.levelOne()
 	
 	method levels() {
 		if (levels.isEmpty()) self.initializeLevels()
 		
 		return levels
 	}
+	
 	method level(index) { return self.levels().get(index-1) }
 	
 	method initializeLevels() {
