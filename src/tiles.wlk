@@ -1,5 +1,22 @@
 import wollok.game.*
 
+class Obstacle {
+	const property position
+	const property image
+	
+	constructor() = self(game.center().x(), game.center().y(), fenceType.lonelyGrass())
+	
+	constructor(x,y) =	self(x,y,fenceType.lonelyGrass())
+	
+	constructor(x,y, _image) { 
+		position =  new Position(x,y)
+		image = _image
+	}
+		
+	method canBeSteppedOn() = false
+	
+}
+
 class Fence {
 	var property position
 	var property image
@@ -165,4 +182,27 @@ object remainingCarrotsCounter {
 	}
 	
 	// Count the accumulated carrots 
+}
+
+object tile {
+	const type = new Dictionary()
+	
+	method fillTypes() {
+		type.put("horizontalFence","./tiles/fences/horizontalFence.png")
+		type.put("verticalFence","./tiles/fences/verticalFence.png")
+		type.put("bottomLeftFence","./tiles/fences/bottomLeftFence.png")
+		type.put("bottomRightFence","./tiles/fences/bottomRightFence.png")
+		type.put("topLeftFence","./tiles/fences/topLeftFence.png")
+		type.put("topRightFence","./tiles/fences/topRightFence.png")
+		type.put("lonelyGrass","./tiles/grass/lonelyGrass.png") 
+		type.put("middleGrass","./tiles/grass/middleGrass.png")
+		type.put("hFence","./tiles/fences/horizontalFence.png")
+		
+	}
+	
+	method get(tile) {
+		type.getOrElse (tile, {})
+	}
+	
+	
 }
