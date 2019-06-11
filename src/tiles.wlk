@@ -89,13 +89,6 @@ class Key inherits Grabable {
 	}
 }
 
-
-
-//To implement
-/*class Carrot2 inherits Grabable (1,0,carrotIMage) {
-	
-}*/
-
 class Carrot {
 	var property position
 
