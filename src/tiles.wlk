@@ -76,6 +76,21 @@ class Grabable {
 	}
 }
 
+class Key inherits Grabable {
+	const property lock
+	
+	constructor(x,y, aLock, _image) = super (x,y,_image) { 
+		lock = aLock
+	}
+
+	override method reactTo(player){
+		lock.remove()
+		game.removeVisual(self)
+	}
+}
+
+
+
 //To implement
 /*class Carrot2 inherits Grabable (1,0,carrotIMage) {
 	
