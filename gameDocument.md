@@ -16,9 +16,9 @@ Objects and classes to implement descriptions:
 -a position make the level end (only when carrot counter is 0)
 
 #Limits classes:
--Wall/Fence-Grass. 
+-Obstacle (Fences, Grass, etc.). 
 	Player can not walk over it (every one have his constant image but same behavior)
-	Wall/Fence have 3 image options (corner, horizontal and vertical)
+	Obstacles have a set of different images but only use one at instantiation.
 	
 -Door/Gate. 
 	Can be open or close depending on other objects interaction with player), has a boolean variable if it open or close.
@@ -67,23 +67,28 @@ Objects and classes to implement descriptions:
 -walking animation graphic movement
 -New game mechanics "rewind time function"
 -Temporal save
--agregar contador
+-time counter
 -add edited levels
 -level selection menu
 
 Pending Stuff:
 -Walk on Spikes Up make bobby die
--Spikes get up whenplayer leave position
--Rotational runway in L or I shape that rotates clockwise when layer leave position and limit walk in some directions
--Button that make runways rotate again (isaias)
--Pass level feature
--add sounds (isaias)
+-Spikes get up only when player leave position 
+(tip: temporal list of object player walk previous time)
 
-Consultas:
-NO SE PUEDE KEYS, COLLIDERS, ONTICK -Test with objects that have effect on game.
-NO SE PUEDE -Resize screen on level change
-OK -Class obstacle intead of grass, fences an others
-(If they are define as subclass of obstacle class and have an image definet in constructor but not a const pos until they are used)
+-Rotational runway in L or I shape that rotates clockwise when layer leave position and limit walk in some directions.
+(tip: same as spikes, and also add availeable moves on player).
+-Button that make runways rotate again.
+-Pass level feature.
+(tip: must be on "any key press")
+-add sounds.
+
+TIPS:
+Only stuff impossible to tes: KEYS, COLLIDERS, ONTICK
+CANT RESIZE SCREEN AFTER FIRST RUN OF THE GAME
+OK TO CHANGE Class obstacle intead of grass, fences an others.
+-To avoid REDRAW the player we can add every carrot with a hole ground tile before, once is a carrot removed the hole graound is already there.
+
 
 
 
