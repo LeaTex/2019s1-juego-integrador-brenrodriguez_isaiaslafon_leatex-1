@@ -44,7 +44,7 @@ class Map {
 
 /* A Level is a dynamic representation of a Map, with contextual information */
 class Level {
-	const levelNumber
+	const property levelNumber
 	const map
 	const bunny
 	
@@ -102,12 +102,19 @@ object levelsList {
 		return levels
 	}
 	
-	method level(index) { return self.levels().get(index-1) }
+	method level(index) {
+		return if (index > self.levels().size()) self.emptyLevel()
+			else { self.levels().get(index-1) }
+	}
 	
 	method initializeLevels() {
 		levels.add(self.levelOne())
 		levels.add(self.levelTwo())
 		levels.add(self.levelThree())
+		levels.add(self.levelFour())
+		levels.add(self.levelFive())
+		levels.add(self.levelSix())
+		levels.add(self.levelSeven())
 	}
 
 	method addExtraLevelForMap(aMap) {
@@ -168,6 +175,92 @@ object levelsList {
 		
 		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(3,map)
+	}
+
+	method levelFour() {
+		var mapDefinition = []
+			
+		mapDefinition.add("GG 122222223")
+		mapDefinition.add("GG 4CCC4CCC6")
+		mapDefinition.add("GG TCCCTCCC6")
+		mapDefinition.add("GG 4CCC4CCC6")
+		mapDefinition.add("GG 122222T23")
+		mapDefinition.add("   4CCC4CCC6")
+		mapDefinition.add(" S TCECTCCC6")
+		mapDefinition.add("   4CCC4CCC6")
+		mapDefinition.add("GG 788888889")
+		
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(4,map)
+	}
+	
+	method levelFive() {
+		var mapDefinition = []
+			
+		mapDefinition.add("GGGGGG GGGGGG")
+		mapDefinition.add("GGGGG E GGGGG")
+		mapDefinition.add("T           T")
+		mapDefinition.add("CGGGGGTGGGGGC")
+		mapDefinition.add("CGGGGGCGGGGGC")
+		mapDefinition.add("CGGGCCTCCGGGC")
+		mapDefinition.add("T   CCGCC   T")
+		mapDefinition.add("GGGGCCTCCGGGG")
+		mapDefinition.add("GGGGGG GGGGGG")
+		mapDefinition.add("GGGGGG GGGGGG")
+		mapDefinition.add("GGGGG   GGGGG")
+		mapDefinition.add("GGGGG S GGGGG")
+		mapDefinition.add("GGGGG   GGGGG")
+
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(5,map)
+	}
+
+	method levelSix() {
+		var mapDefinition = []
+		
+		mapDefinition.add("GGGGGGG   GGG")
+		mapDefinition.add("GC  T   E GGG")
+		mapDefinition.add("G GGGGG   GGG")
+		mapDefinition.add("GTGGGGGGTGGGG")
+		mapDefinition.add("G GGCC     CC")
+		mapDefinition.add("GC  CC 789 CC")
+		mapDefinition.add("GGGGCC     CC")
+		mapDefinition.add("GGGGGGTGGGTGG")
+		mapDefinition.add("GGGGGGCTTTCGG")
+		mapDefinition.add("GGGGGGTGGGTGG")
+		mapDefinition.add("   GG  CCC  G")
+		mapDefinition.add(" S     CTC  G")
+		mapDefinition.add("   GG  CCC  G")
+		
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(6,map)
+	}
+
+	method levelSeven() {
+		var mapDefinition = []
+
+		mapDefinition.add("CCCGGCCCGGCCC")
+		mapDefinition.add("CC TT C TT CC")
+		mapDefinition.add("C  GG   GG  C")
+		mapDefinition.add("GTGGGGTGGGGTG")
+		mapDefinition.add("GTGGGGTGGGGTG")
+		mapDefinition.add("C  GG   GG  C")
+		mapDefinition.add("CC TT E TT CC")
+		mapDefinition.add("C  GG   GG  C")
+		mapDefinition.add("GTGGGGTGGGGTG")
+		mapDefinition.add("GTGGGGTGGGGTG")
+		mapDefinition.add("   GG   GG  C")
+		mapDefinition.add(" S TT C TT CC")
+		mapDefinition.add("   GGCCCGGCCC")
+		
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(7,map)
+	}
+	method emptyLevel() {
+		var mapDefinition = []
+		mapDefinition.add("SE")
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(0,map)
 	}
 
 	method maxPlaygroundSize() {

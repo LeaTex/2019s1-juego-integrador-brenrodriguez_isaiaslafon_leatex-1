@@ -13,12 +13,13 @@ object gameController {
 		game.width(levelsList.maxPlaygroundSize().x())
 		game.height(levelsList.maxPlaygroundSize().y())
 
-		self.initializeGameForLevel(levelsList.level(3))
+		self.initializeGameForLevel(levelsList.level(1))
 	}
 
 	method initializeGameKeyboard() {
 		keyboard.q().onPressDo { game.stop() } // quit
-		keyboard.r().onPressDo { self.restartLevel() } // restart
+		keyboard.r().onPressDo { self.restartLevel() } // restart level
+		keyboard.n().onPressDo { self.goToNextLevel() } // next level
 		keyboard.h().onPressDo { self.showHelp() } // help
 	}
 	method initializePlayerKeyboard() {
@@ -52,6 +53,8 @@ object gameController {
 		var endPoint = playingLevel.map().endPoint()
 		var remainingCarrotsAmount = playingLevel.remainingCarrotsAmount()
 		
+		if (remainingCarrotsAmount == playingLevel.initialCarrotsAmount())
+			game.say(endPoint , "Level " + playingLevel.levelNumber())
 		if (remainingCarrotsAmount > 0)
 			game.say(endPoint , "Carrots left: " + remainingCarrotsAmount)
 		else {
@@ -62,10 +65,11 @@ object gameController {
 	
 	method showHelp() {
 		var helpMessage
-		helpMessage = "Q - Quit the game | "
-		helpMessage += "R - Restart the game\n"
-		helpMessage += "H - Shows this help | "
-		helpMessage += "AWSD - Moves Bobby"
+		helpMessage = "Q- Quit the game | "
+		helpMessage += "R- Restart the game\n"
+		helpMessage += "N- Next level | "
+		helpMessage += "H- Shows this help | "
+		helpMessage += "AWSD- Moves Bobby"
 
 		error.throwWithMessage(helpMessage)
 		//game.say(playingLevel.bunny() , helpMessage)

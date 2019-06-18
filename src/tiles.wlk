@@ -125,7 +125,12 @@ class EndPoint {
 
 	method reactTo(player){
 		//go to next levelimage
-		game.say(self , "Well done!")
+		//game.say(self , "Well done!")
+		
+		game.onTick(1000, "levelComplete", {
+			game.say(player , "Wohooo!") 
+  			gameController.goToNextLevel()
+		})
 	}
 	
 	method  canBeSteppedOn () = true
