@@ -86,6 +86,10 @@ class Key inherits Grabable {
 	}
 }
 
+class Lock {
+	
+}
+
 class Carrot {
 	var property position
 
@@ -105,7 +109,7 @@ class Carrot {
 	}
 }
 
-
+	
 class EndPoint {
 	var property position
 	var image = "./tiles/points/endPointOff.png"
