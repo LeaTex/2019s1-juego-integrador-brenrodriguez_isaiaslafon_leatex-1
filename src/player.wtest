@@ -1,6 +1,7 @@
 import wollok.game.*
 import tiles.*
 import level.*
+import gameController.*
 
 describe "Test del player" {
 	
@@ -12,15 +13,15 @@ describe "Test del player" {
 	
 	fixture {
 		map = new Map(10,10)
-		map.addElement(new Fence(fencePosition, fenceType.horizontal()))
-		map.addElement(trap)
-		map.startPoint(0,0)
+		map.addFence(new Fence(fencePosition, fenceType.horizontal()))
+		map.addTrap(trap)
+		map.startPosition(0,0)
 		level = new Level(1,map)
-		levelsList.currentLevel(level)
+		gameController.playingLevel(level)
 		player = level.player()
 	}
 	
-	test "El jugador no se puede mover por sobre una " {	
+	test "El jugador no se puede mover por sobre una cerca" {
 		assert.notThat(player.canMoveTo(fencePosition))
 	}
 	
@@ -33,15 +34,21 @@ describe "Test del player" {
 	}
 	
 	test "El jugador esta vivo" {
-		assert.equals(player.health(), 100)
+		assert.that(player.alive())
 	}
 	
 	test "El jugador esta muerto" {
+		game.addVisual(player)
 		player.receivedDamage()
-		assert.equals(player.health(), 0)
+		assert.notThat(player.alive())
 	}
 	
 	test "El jugador activa una trampa" {
+		game.addVisual(player)
+		
+		assert.notThat(trap.activated())
+		
+		trap.reactTo(player)
 		assert.that(trap.activated())
 	}
 }

@@ -1,28 +1,10 @@
 import wollok.game.*
+import gameController.*
 import player.*
 import tiles.*
 import level.*
 
 program BobbyCarrot {
-
-//	CONFIG	
-	game.title("Bobby carrot")
-	game.ground("./tiles/ground/ground.png")
-	var level = levelsList.levelThree()
-	levelsList.currentLevel(level)
-	
-	level.prepareGameAccordingToMap(game)
-	game.addVisual(remainingCarrotsCounter)
-	var player = level.player()
-	remainingCarrotsCounter.set(level.initialCarrotsAmount())
-	
-	keyboard.w().onPressDo { player.move(player.position().up(1)) }
-	keyboard.s().onPressDo { player.move(player.position().down(1)) }
-	keyboard.a().onPressDo { player.move(player.position().left(1)) }
-	keyboard.d().onPressDo { player.move(player.position().right(1)) }
-	keyboard.any().onPressDo { if (player.health() == 0)  game.stop() }
-	
-	remainingCarrotsCounter.showCounter()
-	
+	gameController.iniciar()
 	game.start()
 }

@@ -6,21 +6,23 @@ import player.*
  * and the position of the elements */
 class Map {
 	var boardSize
-	var startPoint
+	var startPosition
 	var endPoint
 	var carrots = []
-	var elements = []
+	var fences = []
+	var grasses = []
+	var traps = []
 	
 	constructor(x,y) {
 		boardSize = x->y
-		startPoint = null
+		startPosition = null
 		endPoint = null
 	}
 	method boardSize(x,y) { boardSize = x->y }
 	method boardSize() { return boardSize }
 
-	method startPoint(x,y) { startPoint = new Position(x,y) }
-	method startPoint() { return startPoint }
+	method startPosition(x,y) { startPosition = new Position(x,y) }
+	method startPosition() { return startPosition }
 
 	method endPoint(x,y) { endPoint = new EndPoint(x,y) }
 	method endPoint() { return endPoint }
@@ -28,8 +30,16 @@ class Map {
 	method addCarrot(x,y) { carrots.add(new Carrot(x,y)) }
 	method carrots() { return carrots }
 	
-	method addElement(anElement) { elements.add(anElement) }
-	method elements() { return elements }
+	method addFence(aFence) { fences.add(aFence) }
+	// method fences() { return fences }
+
+	method addGrass(aGrass) { grasses.add(aGrass) }
+	// method grasses() { return grasses }
+
+	method addTrap(aTrap) { traps.add(aTrap) }
+	method traps() { return traps }
+
+	method elements() { return carrots + fences + grasses + traps }
 }
 
 /* A Level is a dynamic representation of a Map, with contextual information */
@@ -37,25 +47,27 @@ class Level {
 	const levelNumber
 	const map
 	const bunny
-	var carrotsOnBoard = []
 	
 	constructor(_level, _map) {
 		levelNumber = _level
 		map = _map
-		bunny = new Player(map.startPoint())
-		carrotsOnBoard.addAll(map.carrots())
+		bunny = new Player(map.startPosition())
 	}
 
 	method prepareGameAccordingToMap(aGame) {
-		game.width(map.boardSize().x())
-		game.height(map.boardSize().y())
+		// game.width(map.boardSize().x())
+		// game.height(map.boardSize().y())
 
-		map.carrots().forEach{ z => game.addVisual(z) }
 		map.elements().forEach{ e => game.addVisual(e) }
 		
 		game.addVisual(map.endPoint())
 		game.addVisual(bunny)
-		
+	}
+	
+	method restart() {
+		bunny.restartAt(map.startPosition())
+		map.endPoint().endPointOff()
+		map.traps().forEach{ t => t.activated(false) }
 	}
 	
 	method map() = map
@@ -67,18 +79,22 @@ class Level {
 	method initialCarrotsAmount() { return map.carrots().size() }
 	
 	method collectedCarrotsAmount() {
-		return self.initialCarrotsAmount() - carrotsOnBoard.size()
+		return bunny.collectedCarrots().size()
 	}
-	
-	method allCollected() {
+	method remainingCarrotsAmount() {
+		return self.initialCarrotsAmount() - bunny.collectedCarrots().size()
+	}
+
+	method areAllCarrotsCollected() {
 		return self.collectedCarrotsAmount() == self.initialCarrotsAmount()
 	}
+	
+	method nextLevel() {return levelsList.level(levelNumber+1)}
 }
 
 /* A WKO with a hardcoded list of level to play */
 object levelsList {
 	var levels = []
-	var property currentLevel = self.levelOne()
 	
 	method levels() {
 		if (levels.isEmpty()) self.initializeLevels()
@@ -153,6 +169,17 @@ object levelsList {
 		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(3,map)
 	}
+
+	method maxPlaygroundSize() {
+		var maxWidth
+		var maxHeight
+
+		maxWidth = self.levels().map({ l => l.map().boardSize().x() }).max()
+		maxHeight = self.levels().map({ l => l.map().boardSize().y() }).max()
+		
+		return maxWidth -> maxHeight  
+		
+	}
 }
 
 object mapBuilder {
@@ -192,19 +219,19 @@ object mapBuilder {
 	}
 	
 	method addElementAccordingTo(char, y, x) {
-		if (char == "S") { map.startPoint(x,y) }
+		if (char == "S") { map.startPosition(x,y) }
 		if (char == "E") { map.endPoint(x,y) }
 		if (char == "C") { map.addCarrot(x,y) }
-		if (char == "F") { map.addElement(new Fence(x,y)) }
-		if (char == "G") { map.addElement(new Grass(x,y)) }
-		if (char == "T") { map.addElement(new Trap(x,y)) }
+		if (char == "G") { map.addGrass(new Grass(x,y)) }
+		if (char == "T") { map.addTrap(new Trap(x,y)) }
+		if (char == "F") { map.addFence(new Fence(x,y)) }
 		
-		if (char == "1") { map.addElement(new Fence(x,y, fenceType.topLeft())) }
-		if (char == "3") {map.addElement(new Fence(x,y,fenceType.topRight())) }
-		if (char == "7") { map.addElement(new Fence(x,y,fenceType.bottomLeft())) }
-		if (char == "9") { map.addElement(new Fence(x,y,fenceType.bottomRight())) }
-		if (char == "2" or char == "8") { map.addElement(new Fence(x,y,fenceType.horizontal())) }
-		if (char == "4" or char == "6") { map.addElement(new Fence(x,y,fenceType.vertical())) }
+		if (char == "1") { map.addFence(new Fence(x,y, fenceType.topLeft())) }
+		if (char == "3") { map.addFence(new Fence(x,y,fenceType.topRight())) }
+		if (char == "7") { map.addFence(new Fence(x,y,fenceType.bottomLeft())) }
+		if (char == "9") { map.addFence(new Fence(x,y,fenceType.bottomRight())) }
+		if (char == "2" or char == "8") { map.addFence(new Fence(x,y,fenceType.horizontal())) }
+		if (char == "4" or char == "6") { map.addFence(new Fence(x,y,fenceType.vertical())) }
 		
 	}
 }

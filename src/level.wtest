@@ -6,17 +6,17 @@ describe "tests para maps y niveles" {
 
 	test "el mapa tiene un tamaño de 10 x 10 con una posición de inicio y una de fin" {
 		var map = new Map(10,10)
-		map.startPoint(3,3)
+		map.startPosition(3,3)
 		map.endPoint(5,5)
 		
 		assert.equals(map.boardSize().x() , 10)
 		assert.equals(map.boardSize().y() , 10)
-		assert.equals(map.startPoint() , new Position(3,3))
+		assert.equals(map.startPosition() , new Position(3,3))
 		assert.equals(map.endPoint().position() , new Position(5,5))
 		assert.that(map.carrots().isEmpty())
 		assert.that(map.elements().isEmpty())
 	}
-	
+
 	test "el mapa tiene 3 zanahorias" {
 		var map = new Map(10,10)
 		map.addCarrot(6,7)
@@ -28,9 +28,9 @@ describe "tests para maps y niveles" {
 
 	test "el mapa tiene 3 paredes" {
 		var map = new Map(10,10)
-		map.addElement(new Fence(new Position(6,7), fenceType.horizontal()))
-		map.addElement(new Fence(new Position(7,8), fenceType.horizontal()))
-		map.addElement(new Fence(new Position(8,9), fenceType.horizontal()))
+		map.addFence(new Fence(new Position(6,7), fenceType.horizontal()))
+		map.addFence(new Fence(new Position(7,8), fenceType.horizontal()))
+		map.addFence(new Fence(new Position(8,9), fenceType.horizontal()))
 		
 		assert.equals(map.elements().size(), 3)	
 	}
@@ -54,6 +54,15 @@ describe "tests para maps y niveles" {
 	test "lista de niveles" {
 		assert.notThat(levelsList.levelTwo() == null)
 	}
+
+	test "el nivel 2 le sigue al nivel 1, y el nivel 3 le sigue al nivel 2" {
+		var levelOne = levelsList.level(1)
+		var levelTwo = levelsList.level(2)
+		var levelThree = levelsList.level(3)
+		
+		assert.equals(levelOne.nextLevel(), levelTwo)
+		assert.equals(levelTwo.nextLevel(), levelThree)
+	}
 	
 	test "map builder full" {
 		var mapDefinition = []
@@ -66,6 +75,6 @@ describe "tests para maps y niveles" {
 		
 		// var map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		// assert.notThat(map == null)
-		
 	}
+
 }

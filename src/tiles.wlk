@@ -1,4 +1,5 @@
 import wollok.game.*
+import gameController.*
 
 class Obstacle {
 	const property position
@@ -68,11 +69,7 @@ class Grabable {
 	method  canBeSteppedOn () = true
 	
 	method reactTo(player){
-		player.removeCarrot(self)
-		game.removeVisual(self)
-		game.addVisual(new Hole(position = self.position()))
-		player.reDraw()
-		remainingCarrotsCounter.decrementAndShow()
+		// TODO completar
 	}
 }
 
@@ -101,11 +98,10 @@ class Carrot {
 	method  canBeSteppedOn () = true
 	
 	method reactTo(player){
-		player.removeCarrot(self)
 		game.removeVisual(self)
 		game.addVisual(new Hole(position = self.position()))
-		player.reDraw()
-		remainingCarrotsCounter.decrementAndShow()
+		player.collectCarrot(self)
+		gameController.carrotCollected()
 	}
 }
 
@@ -113,6 +109,7 @@ class Carrot {
 class EndPoint {
 	var property position
 	var image = "./tiles/points/endPointOff.png"
+
 	constructor() = self(game.center())
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
@@ -120,11 +117,15 @@ class EndPoint {
 	method image() = image 
 	
 	method endPointOn() {
-	image = "./tiles/points/endPointOff.png"
+		image = "./tiles/points/endPointOn.png"
 	}
-	
+	method endPointOff() {
+		image = "./tiles/points/endPointOff.png"
+	}	
+
 	method reactTo(player){
 		//go to next levelimage
+		game.say(self , "Well done!")
 	}
 	
 	method  canBeSteppedOn () = true
@@ -145,11 +146,10 @@ class Trap {
 	method reactTo(player) { 
 		 
 		if (self.activated()) { 
-			player.receivedDamage()			 
+			player.receivedDamage()		 
 		} 
-		 
 		self.activated(true) 
-	} 
+	}
 } 
 
 class Hole {
@@ -161,6 +161,7 @@ class Hole {
 	method reactTo(player){}
 }
 
+/*
 object remainingCarrotsCounter {
 	
 	var property position = new Position(-1, -1)
@@ -173,23 +174,19 @@ object remainingCarrotsCounter {
 	 counter -= 1
 	}
 	
-	method showCounter() {
-	 	game.onTick(100, "show counter", { 
-   	    game.say(self, "Carrots: " + counter)
-  		game.removeTickEvent("show counter")
-	})
-	
-	}
+	method showCounter() {game.say(self, "Carrots: " + counter)}
+
 	method image() = "./tiles/grass/middleGrass.png"
 	
 	method decrementAndShow() {
 		self.decrement()
 		self.showCounter()
 	}
-	
-	// Count the accumulated carrots 
 }
+*/
 
+/* *************************************** */
+/*
 object visual {
 	const type = new Dictionary()
 	
@@ -256,3 +253,4 @@ object visual {
 		type.getOrElse (tile,{=> type.get("middleGrass")})
 	}
 }
+*/

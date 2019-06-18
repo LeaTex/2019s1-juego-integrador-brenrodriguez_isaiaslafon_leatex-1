@@ -1,20 +1,17 @@
 import wollok.game.*
 import level.*
+import gameController.*
 
 class Player {
 	var property position
-	var property accumulatedCarrots= []
-	var image = "./bobby/bobby.png"
-	var property health = 100
+	var property collectedCarrots = []
+	var property alive = true
 	
 	constructor() = self(new Position(0,0))
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 
-	
-	method image() = image
-	
-	method showDead() { image ="./bobby/deadBobby.png" }
+	method image() = if (alive) "./bobby/bobby.png" else "./bobby/deadBobby.png"
 	
 	method canMoveTo(newPosition) {
 		
@@ -26,13 +23,13 @@ class Player {
 	method isPositionInsideBoard(newPosition) {
 		return newPosition.x() >= 0
 			and newPosition.y() >= 0
-			and newPosition.x() < levelsList.currentLevel().map().boardSize().x()
-			and newPosition.y() < levelsList.currentLevel().map().boardSize().y()
+			and newPosition.x() < gameController.playingLevel().map().boardSize().x()
+			and newPosition.y() < gameController.playingLevel().map().boardSize().y()
 	}
 
 	method move(nuevaPosicion) {
 		
-		if (self.canMoveTo(nuevaPosicion)) {
+		if (alive and self.canMoveTo(nuevaPosicion)) {
 			 self.position(nuevaPosicion)	
 			 
 			 if (game.colliders(self).size() > 0) {
@@ -42,13 +39,28 @@ class Player {
 	}	
 	
 	method receivedDamage() {
-		health = 0
+		alive = false
+		game.say(self, "Ouch!!")
+		
+		game.onTick(2000, "deadBooby", { 
+  			gameController.restartLevel()
+		})
 	}
 	
-	method removeCarrot(carrot) { self.accumulatedCarrots().remove(carrot) }
+	method collectCarrot(carrot) {
+		collectedCarrots.add(carrot) 
+		self.reDraw()
+	}
 	
 	method reDraw() {
+		/* Put the player again in the top layer */
 		game.removeVisual(self)
 		game.addVisual(self)
+	}
+	
+	method restartAt(aPosition) {
+		position = aPosition
+		collectedCarrots.clear()
+		alive = true
 	}
 }
