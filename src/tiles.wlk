@@ -91,9 +91,19 @@ object silverKey inherits Key(0,0, silverLock, visual.get("silverKey")) {}
 object redKey inherits Key(0,0, redLock, visual.get("redKey")) {}
 
 
-class Lock {
-	
+class Lock inherits Obstacle{
+	constructor(x,y, _image) { 
+		position = new Position (x,y)
+		image = _image
+	}
 }
+
+object goldLock inherits Lock(0,0, visual.get("goldLock")){}
+
+object silverLock inherits Lock(0,0, visual.get("silverLock")){}
+	
+object redLock inherits Lock(0,0, visual.get("redLock")){}
+
 
 class Carrot {
 	var property position
