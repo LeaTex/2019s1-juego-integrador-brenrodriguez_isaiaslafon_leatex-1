@@ -1,7 +1,8 @@
 object visual {
-	const type = new Dictionary()
+	const _type = self.fillTypes()
 	
 	method fillTypes() {
+		const type = new Dictionary()
 		//Player:
 		type.put("bobby","./tiles/player/bobbyCarrot.png")
 		type.put("deadBobby","./tiles/player/bobbyCarrot.png")
@@ -63,9 +64,11 @@ object visual {
 			type.put("goldLock","./tiles/locks/goldLock.png")
 			type.put("silverLock","./tiles/locks/silverLock.png")
 			type.put("redLock","./tiles/locks/redLock.png")
+			
+			return type
 	}
 	
 	method get(tile) {
-		type.getOrElse (tile,{=> type.get("middleGrass")})
+		_type.getOrElse (tile,{=> _type.get("middleGrass")})
 	}
 }
