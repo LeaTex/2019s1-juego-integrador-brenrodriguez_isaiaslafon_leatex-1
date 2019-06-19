@@ -2,20 +2,25 @@ import wollok.game.*
 import gameController.*
 import gameVisuals.*
 
-class Obstacle {
-	const property position
+class BasicObstacle {
 	const property image
 	
-	constructor() = self(game.center().x(), game.center().y(), fenceType.lonelyGrass())
-	
-	constructor(x,y) =	self(x,y,visual.get("lonelyGrass"))
-	
-	constructor(x,y, _image) { 
-		position =  new Position(x,y)
+	constructor(_image) { 
 		image = _image
 	}
 		
 	method canBeSteppedOn() = false
+}
+
+class Obstacle inherits BasicObstacle{
+	const property position
+		
+	constructor(x,y) =	self(x,y,visual.get("lonelyGrass"))
+	
+	constructor(x,y, _image) = super(_image) { 
+		position =  new Position(x,y)
+	}
+		
 }
 
 class Fence {
@@ -86,23 +91,23 @@ class Key inherits Grabable {
 	}
 }
 
+class Lock inherits BasicObstacle{
+	var property position
+	
+	constructor(x,y, _image) = super(_image) { 
+		position = new Position (x,y)
+	}
+}
+
+//this are implemented as objects cause can be or not on the map but they only change position and always are "linked" with the same object.
+object goldLock inherits Lock(0,0, visual.get("goldLock")) {}
+object silverLock inherits Lock(0,0, visual.get("silverLock")) {}
+object redLock inherits Lock(0,0, visual.get("redLock")) {}
+
 object goldKey inherits Key(0,0, goldLock, visual.get("goldKey")) {}
 object silverKey inherits Key(0,0, silverLock, visual.get("silverKey")) {}
 object redKey inherits Key(0,0, redLock, visual.get("redKey")) {}
 
-
-class Lock inherits Obstacle{
-	constructor(x,y, _image) { 
-		position = new Position (x,y)
-		image = _image
-	}
-}
-
-object goldLock inherits Lock(0,0, visual.get("goldLock")){}
-
-object silverLock inherits Lock(0,0, visual.get("silverLock")){}
-	
-object redLock inherits Lock(0,0, visual.get("redLock")){}
 
 
 class Carrot {
