@@ -68,7 +68,5 @@ object visual {
 			return tempGraphics
 	}
 	
-	method get(graphic) {
-		graphics.getOrElse (graphic,{=> graphics.get("middleGrass")})
-	}
+	method get(graphic) = graphics.getOrElse (graphic,{=> graphics.get("middleGrass")})
 }
