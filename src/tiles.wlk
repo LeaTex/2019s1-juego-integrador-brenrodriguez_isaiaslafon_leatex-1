@@ -133,7 +133,7 @@ class Carrot {
 class EndPoint {
 	var property position
 	var image = "./tiles/points/endPointOff.png"
-
+	var levelComplete = false
 	constructor() = self(game.center())
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
@@ -142,19 +142,25 @@ class EndPoint {
 	
 	method endPointOn() {
 		image = "./tiles/points/endPointOn.png"
+		levelComplete = true
 	}
 	method endPointOff() {
 		image = "./tiles/points/endPointOff.png"
+		levelComplete = false
 	}	
 
 	method reactTo(player){
 		//go to next levelimage
 		//game.say(self , "Well done!")
 		
-		game.onTick(1000, "levelComplete", {
+		if (levelComplete) {
+			levelComplete = false
+			game.onTick(1000, "levelComplete", {
 			game.say(player , "Wohooo!") 
   			gameController.goToNextLevel()
-		})
+			})
+		}
+
 	}
 	
 	method  canBeSteppedOn () = true
