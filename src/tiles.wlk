@@ -219,3 +219,21 @@ object remainingCarrotsCounter {
 	}
 }
 */
+
+class Belt {
+	var property position
+	
+	var property beltType = 0
+	
+	constructor(x,y) = self(new Position(x,y))
+	
+	constructor(_position) { position = _position }
+	
+	method image() = assets.get("leftBelt")
+	
+	method canBeSteppedOn () = true
+	 
+	method reactTo(player){
+		
+	}
+}
