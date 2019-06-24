@@ -105,6 +105,7 @@ object levelsList {
 	}
 	
 	method initializeLevels() {
+		levels.add(self.levelEight())
 		levels.add(self.levelOne())
 		levels.add(self.levelTwo())
 		levels.add(self.levelThree())
@@ -253,6 +254,29 @@ object levelsList {
 		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(7,map)
 	}
+	
+	
+		method levelEight() {
+		var mapDefinition = []
+
+		mapDefinition.add("CCCGGCCCGGCCC")
+		mapDefinition.add("CC TT C TT CC")
+		mapDefinition.add("C  GG   GG  C")
+		mapDefinition.add("GTGGGGTGGGGTG")
+		mapDefinition.add("GTGGGGTGGGGTG")
+		mapDefinition.add("C  GG   GG  C")
+		mapDefinition.add("CC TT E TT CC")
+		mapDefinition.add("C  GG   GG  C")
+		mapDefinition.add("GT  B T V  TG")
+		mapDefinition.add("GTGGGGTGGGGTG")
+		mapDefinition.add("   GG   GG  C")
+		mapDefinition.add(" S TT C TT CC")
+		mapDefinition.add("   GGCCCGGCCC")
+		
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(8,map)
+	}
+	
 	method emptyLevel() {
 		var mapDefinition = []
 		mapDefinition.add("SE")
@@ -313,6 +337,8 @@ object mapBuilder {
 		if (char == "C") { map.addCarrot(x,y) }
 		if (char == "G") { map.addObstacle(new Obstacle(x,y, assets.get("middleGrass"))) }
 		if (char == "T") { map.addTrap(new Trap(x,y)) }
+		if (char == "V") { map.addFence(new Belt(x,y, 1)) }
+		if (char == "B") { map.addFence(new Belt(x,y, 0)) }
 				
 		if (char == "1") { map.addObstacle(new Obstacle(x,y, assets.get("topLeftFence"))) }
 		if (char == "3") { map.addObstacle(new Obstacle(x,y, assets.get("topRightFence"))) }
