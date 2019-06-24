@@ -44,6 +44,9 @@ object assets {
 			tempGraphics.put("endPointOn","./tiles/points/endPointOn.png")
 			tempGraphics.put("endPointOff","./tiles/points/endPointOff.png")
 			
+		//Spikes:
+		tempGraphics.put("spikesUp","./tiles/spikes/spikesUp.png")
+		tempGraphics.put("spikesDown","./tiles/spikes/spikesDown.png")
 		
 		//dynamicObstacles:
 			//Runaways:
