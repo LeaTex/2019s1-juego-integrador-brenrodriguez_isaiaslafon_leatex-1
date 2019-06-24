@@ -27,10 +27,10 @@ class Player {
 			and newPosition.y() < gameController.playingLevel().map().boardSize().y()
 	}
 
-	method move(nuevaPosicion) {
+	method move(newPosition) {
 		
-		if (alive and self.canMoveTo(nuevaPosicion)) {
-			 self.position(nuevaPosicion)	
+		if (alive and self.canMoveTo(newPosition)) {
+			 self.position(newPosition)	
 			 
 			 if (game.colliders(self).size() > 0) {
 			 	game.colliders(self).first().reactTo(self) 
