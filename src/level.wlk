@@ -12,8 +12,6 @@ class Map {
 	var fences = []
 	var grasses = []
 	var traps = []
-	var keys= []
-	var locks= []
 	
 	constructor(x,y) {
 		boardSize = x->y
@@ -40,14 +38,8 @@ class Map {
 
 	method addTrap(aTrap) { traps.add(aTrap) }
 	method traps() { return traps }
-	
-	method addKey(aKey) { keys.add(aKey) }
-	method keys() { return keys }
-	
-	method addLock(aLock) { locks.add(aLock) }
-	method locks() { return locks }
 
-	method elements() { return carrots + fences + grasses + traps + locks + keys }
+	method elements() { return carrots + fences + grasses + traps }
 }
 
 /* A Level is a dynamic representation of a Map, with contextual information */
@@ -70,12 +62,6 @@ class Level {
 		
 		game.addVisual(map.endPoint())
 		game.addVisual(bunny)
-		game.addVisual(silverLock)
-		game.addVisual(redLock)
-		game.addVisual(goldLock)
-		//game.addVisual(silverKey)
-		//game.addVisual(redKey)
-		//game.addVisual(goldKey)
 	}
 	
 	method restart() {
@@ -145,7 +131,7 @@ object levelsList {
 		mapDefinition.add(" 4CCC6 ")
 		mapDefinition.add(" 4CCC6 ")
 		mapDefinition.add(" 73 19 ")
-		mapDefinition.add("   L   ")
+		mapDefinition.add("       ")
 		mapDefinition.add("   S   ")
 		mapDefinition.add("GG   GG")
 					 
@@ -296,8 +282,6 @@ object mapBuilder {
 		F	default fence 
 		G	grass
 		T	trap
-		L   lock
-		K   key
 		Fences:
 		1 2 3 = top left, horizontal and top right. 
 		4   6 = vertical fence
@@ -334,9 +318,6 @@ object mapBuilder {
 		if (char == "G") { map.addGrass(new Grass(x,y)) }
 		if (char == "T") { map.addTrap(new Trap(x,y)) }
 		if (char == "F") { map.addFence(new Fence(x,y)) }
-		if (char == "L") { map.addLock(goldLock) }
-		//if (char == "K") { map.addKey(redKey) }
-		
 		
 		if (char == "1") { map.addFence(new Fence(x,y, fenceType.topLeft())) }
 		if (char == "3") { map.addFence(new Fence(x,y,fenceType.topRight())) }
