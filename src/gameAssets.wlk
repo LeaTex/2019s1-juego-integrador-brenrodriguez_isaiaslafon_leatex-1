@@ -4,7 +4,7 @@ object assets {
 	method fillGraphicsDictionary() {
 		const tempGraphics = new Dictionary()
 		//Missing Graphics
-		tempGraphics.put("AssetNotFound","./assetNotFound.png")
+		tempGraphics.put("assetNotFound","./assetNotFound.png")
 		
 		//Player:
 		tempGraphics.put("bobby","./bobby/bobby.png")
