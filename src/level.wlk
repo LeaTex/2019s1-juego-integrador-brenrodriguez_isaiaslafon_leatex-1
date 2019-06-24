@@ -1,6 +1,7 @@
 import wollok.game.*
 import tiles.*
 import player.*
+import gameAssets.*
 
 /* A Map defines the initial view of a Level. It describes the size of the playground
  * and the position of the elements */
@@ -9,8 +10,7 @@ class Map {
 	var startPosition
 	var endPoint
 	var carrots = []
-	var fences = []
-	var grasses = []
+	var obstacles = []
 	var traps = []
 	
 	constructor(x,y) {
@@ -30,16 +30,13 @@ class Map {
 	method addCarrot(x,y) { carrots.add(new Carrot(x,y)) }
 	method carrots() { return carrots }
 	
-	method addFence(aFence) { fences.add(aFence) }
-	// method fences() { return fences }
-
-	method addGrass(aGrass) { grasses.add(aGrass) }
-	// method grasses() { return grasses }
+	method addObstacle(anObstacle) { obstacles.add(anObstacle) }
+	// method obstacles() { return obstacles }
 
 	method addTrap(aTrap) { traps.add(aTrap) }
 	method traps() { return traps }
 
-	method elements() { return carrots + fences + grasses + traps }
+	method elements() { return carrots + obstacles + traps }
 }
 
 /* A Level is a dynamic representation of a Map, with contextual information */
@@ -144,7 +141,7 @@ object levelsList {
 			
 		mapDefinition.add("GGG E GGG")
 		mapDefinition.add("         ")
-		mapDefinition.add(" 122T2F3 ")
+		mapDefinition.add(" 122T223 ")
 		mapDefinition.add(" 4CCCCC6 ")
 		mapDefinition.add(" 4C C C6 ")
 		mapDefinition.add(" 4CCCCC6 ")
@@ -278,8 +275,7 @@ object levelsList {
 object mapBuilder {
 	/*	S	start point
 		E	end point
-		C	carrot
-		F	default fence 
+		C	carrot 
 		G	grass
 		T	trap
 		Fences:
@@ -315,16 +311,15 @@ object mapBuilder {
 		if (char == "S") { map.startPosition(x,y) }
 		if (char == "E") { map.endPoint(x,y) }
 		if (char == "C") { map.addCarrot(x,y) }
-		if (char == "G") { map.addGrass(new Grass(x,y)) }
+		if (char == "G") { map.addObstacle(new Obstacle(x,y, assets.get("middleGrass"))) }
 		if (char == "T") { map.addTrap(new Trap(x,y)) }
-		if (char == "F") { map.addFence(new Fence(x,y)) }
-		
-		if (char == "1") { map.addFence(new Fence(x,y, fenceType.topLeft())) }
-		if (char == "3") { map.addFence(new Fence(x,y,fenceType.topRight())) }
-		if (char == "7") { map.addFence(new Fence(x,y,fenceType.bottomLeft())) }
-		if (char == "9") { map.addFence(new Fence(x,y,fenceType.bottomRight())) }
-		if (char == "2" or char == "8") { map.addFence(new Fence(x,y,fenceType.horizontal())) }
-		if (char == "4" or char == "6") { map.addFence(new Fence(x,y,fenceType.vertical())) }
+				
+		if (char == "1") { map.addObstacle(new Obstacle(x,y, assets.get("topLeftFence"))) }
+		if (char == "3") { map.addObstacle(new Obstacle(x,y, assets.get("topRightFence"))) }
+		if (char == "7") { map.addObstacle(new Obstacle(x,y, assets.get("bottomLeftFence"))) }
+		if (char == "9") { map.addObstacle(new Obstacle(x,y, assets.get("bottomRightFence"))) }
+		if (char == "2" or char == "8") { map.addObstacle(new Obstacle(x,y, assets.get("horizontalFence"))) }
+		if (char == "4" or char == "6") { map.addObstacle(new Obstacle(x,y, assets.get("verticalFence"))) }
 		
 	}
 }
