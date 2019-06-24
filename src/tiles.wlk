@@ -225,15 +225,36 @@ class Belt {
 	
 	var property beltType = 0
 	
-	constructor(x,y) = self(new Position(x,y))
+	constructor(x,y,type) {
+		beltType = type
+		position = new Position(x,y)
+	}
+	
+	constructor(x,y) =  self(new Position(x,y))
 	
 	constructor(_position) { position = _position }
 	
-	method image() = assets.get("leftBelt")
+	method image() = if (beltType == 0) assets.get("leftBelt") else return assets.get("rightBelt")
 	
 	method canBeSteppedOn () = true
 	 
 	method reactTo(player){
-		
+		if (beltType == 0) {
+			if (player.direction().x() > 0) { //derecha
+				player.move(player.position().right(1))
+			} else {
+				player.move(player.position().right(1))
+			}
+		} else if (beltType == 1) {
+			if (player.direction().x() < 0) { //derecha
+				player.move(player.position().left(1))
+			} else {
+				player.move(player.position().left(1))
+			}
+		} else if (beltType == 2) {
+			
+		} else {
+			
+		}
 	}
 }
