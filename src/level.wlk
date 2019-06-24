@@ -259,20 +259,20 @@ object levelsList {
 		method levelEight() {
 		var mapDefinition = []
 
-		mapDefinition.add("CCCGGCCCGGCCC")
-		mapDefinition.add("CC TT C TT CC")
-		mapDefinition.add("C  GG   GG  C")
-		mapDefinition.add("GTGGGGTGGGGTG")
-		mapDefinition.add("GTGGGGTGGGGTG")
-		mapDefinition.add("C  GG   GG  C")
-		mapDefinition.add("CC TT E TT CC")
-		mapDefinition.add("C  GG   GG  C")
-		mapDefinition.add("GT  B T V  TG")
-		mapDefinition.add("GTGGGGTGGGGTG")
-		mapDefinition.add("   GG   GG  C")
-		mapDefinition.add(" S TT C TT CC")
-		mapDefinition.add("   GGCCCGGCCC")
-		
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("G   G  GGGGGG")
+		mapDefinition.add("G E B  TCTCTG")
+		mapDefinition.add("G   G  GTCGCG")
+		mapDefinition.add("G   G  GCTCTG")
+		mapDefinition.add("G   V  TTCTGG")
+		mapDefinition.add("G S G  GGTCGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+	
 		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(8,map)
 	}
