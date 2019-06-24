@@ -1,6 +1,6 @@
 import wollok.game.*
 import gameController.*
-import gameVisuals.*
+import gameAssets.*
 
 class BasicObstacle {
 	const property image
@@ -15,7 +15,7 @@ class BasicObstacle {
 class Obstacle inherits BasicObstacle{
 	const property position
 		
-	constructor(x,y) =	self(x,y,visual.get("lonelyGrass"))
+	constructor(x,y) =	self(x,y, assets.get("lonelyGrass"))
 	
 	constructor(x,y, _image) = super(_image) { 
 		position =  new Position(x,y)
@@ -100,13 +100,13 @@ class Lock inherits BasicObstacle{
 }
 
 //this are implemented as objects cause can be or not on the map but they only change position and always are "linked" with the same object.
-object goldLock inherits Lock(0,0, visual.get("goldLock")) {}
-object silverLock inherits Lock(0,0, visual.get("silverLock")) {}
-object redLock inherits Lock(0,0, visual.get("redLock")) {}
+object goldLock inherits Lock(0,0, assets.get("goldLock")) {}
+object silverLock inherits Lock(0,0, assets.get("silverLock")) {}
+object redLock inherits Lock(0,0, assets.get("redLock")) {}
 
-object goldKey inherits Key(0,0, goldLock, visual.get("goldKey")) {}
-object silverKey inherits Key(0,0, silverLock, visual.get("silverKey")) {}
-object redKey inherits Key(0,0, redLock, visual.get("redKey")) {}
+object goldKey inherits Key(0,0, goldLock, assets.get("goldKey")) {}
+object silverKey inherits Key(0,0, silverLock, assets.get("silverKey")) {}
+object redKey inherits Key(0,0, redLock, assets.get("redKey")) {}
 
 
 
@@ -117,7 +117,7 @@ class Carrot {
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 
-	method image() = "./tiles/ground/carrot.png"
+	method image() = assets.get("carrot")
 
 	method  canBeSteppedOn () = true
 	
@@ -132,7 +132,7 @@ class Carrot {
 	
 class EndPoint {
 	var property position
-	var image = "./tiles/points/endPointOff.png"
+	var image = assets.get("endPointOff")
 	var levelComplete = false
 	constructor() = self(game.center())
 	constructor(x,y) = self(new Position(x,y))
@@ -141,11 +141,11 @@ class EndPoint {
 	method image() = image 
 	
 	method endPointOn() {
-		image = "./tiles/points/endPointOn.png"
+		image = assets.get("endPointOn")
 		levelComplete = true
 	}
 	method endPointOff() {
-		image = "./tiles/points/endPointOff.png"
+		image = assets.get("endPointOff")
 		levelComplete = false
 	}	
 
@@ -174,7 +174,7 @@ class Trap {
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 	 
-	method image() = if (activated) "./tiles/spikes/spikesUp.png" else "./tiles/spikes/spikesDown.png" 
+	method image() = if (activated) assets.get("spikesUp") else assets.get("spikesDown") 
 	 
 	method  canBeSteppedOn () = true 
 	 
@@ -191,7 +191,7 @@ class Hole {
 	var property position
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
-	method image() = "./tiles/ground/groundHole.png"
+	method image() = assets.get("groundHole")
 	method canBeSteppedOn () = true 
 	method reactTo(player){}
 }

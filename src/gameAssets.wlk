@@ -1,14 +1,14 @@
-object visual {
+object assets {
 	const graphics = self.fillGraphicsDictionary()
 	
 	method fillGraphicsDictionary() {
 		const tempGraphics = new Dictionary()
 		//Missing Graphics
-		tempGraphics.put("AssetNotFound","assetNotFound.png")
+		tempGraphics.put("AssetNotFound","./assetNotFound.png")
 		
 		//Player:
-		tempGraphics.put("bobby","./tiles/player/bobbyCarrot.png")
-		tempGraphics.put("deadBobby","./tiles/player/bobbyCarrot.png")
+		tempGraphics.put("bobby","./bobby/bobby.png")
+		tempGraphics.put("deadBobby","./bobby/deadBobby.png")
 		
 		//Obstacles:
 			//Fences:
@@ -70,6 +70,6 @@ object visual {
 			
 			return tempGraphics
 	}
-	
+
 	method get(graphic) = graphics.getOrElse (graphic,{=> graphics.get("assetNotFound")})
 }
