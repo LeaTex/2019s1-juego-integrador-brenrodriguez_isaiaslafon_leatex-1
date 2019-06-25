@@ -1,6 +1,17 @@
+import gameAssets.*
+import tiles.*
+import wollok.game.*
 
-test "testX" {
 
-	assert.that(true)
-
+test "retorna una imagen con la leyenda 'not found' cuando es incorrecto el nombre de la misma." {
+	assert.equals("./assetNotFound.png", assets.get("anyWrongImage"))
 }
+test "retorna la imagen correcta" {
+	assert.equals("./tiles/grass/lonelyGrass.png", assets.get("lonelyGrass"))
+}
+
+/*
+ * que si pedis a assets un materual que no existe te devuelve la ruta del assetNotFound, y en obstacle que si se quiere mover bobby a su posicion le dice que no, etc.
+por ahí hay algo mal en las llaves o candados, hay que mirarlo y comparar con los otros objetos existentes
+la llave as un grababble como la zanahoria y el candado un obstaculo pero qye se puede quitar.
+ */

@@ -12,6 +12,7 @@ class Map {
 	var carrots = []
 	var obstacles = []
 	var traps = []
+	var belts = []
 	
 	constructor(x,y) {
 		boardSize = x->y
@@ -35,8 +36,11 @@ class Map {
 
 	method addTrap(aTrap) { traps.add(aTrap) }
 	method traps() { return traps }
+	
+	method addBelt(aBelt) { belts.add(aBelt) }
+	method belts() { return belts }
 
-	method elements() { return carrots + obstacles + traps }
+	method elements() { return carrots + obstacles + traps +  belts}
 }
 
 /* A Level is a dynamic representation of a Map, with contextual information */
@@ -112,6 +116,8 @@ object levelsList {
 		levels.add(self.levelFive())
 		levels.add(self.levelSix())
 		levels.add(self.levelSeven())
+		levels.add(self.levelEight())
+		levels.add(self.levelNine())
 	}
 
 	method addExtraLevelForMap(aMap) {
@@ -253,6 +259,50 @@ object levelsList {
 		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(7,map)
 	}
+	
+	
+	method levelEight() {
+		var mapDefinition = []
+
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("G   G  GGGGGG")
+		mapDefinition.add("G E B  TCTCTG")
+		mapDefinition.add("G   G  GTCGCG")
+		mapDefinition.add("G   G  GCTCTG")
+		mapDefinition.add("G   V  TTCTGG")
+		mapDefinition.add("G S G  GGTCGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+	
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(8,map)
+	}
+	
+	method levelNine() {
+		var mapDefinition = []
+
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GCCCGGGCCCGGG")
+		mapDefinition.add("GCSCBBBCCCGGG")
+		mapDefinition.add("GCCCGGGCCCGGG")
+		mapDefinition.add("GGNGGGGG GGGG")
+		mapDefinition.add("GGNGGGGG GGGG")
+		mapDefinition.add("G   GGGCCCGGG")
+		mapDefinition.add("G E TCTCCCGGG")
+		mapDefinition.add("G   GGGCCCGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+	
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(9,map)
+	}
+	
 	method emptyLevel() {
 		var mapDefinition = []
 		mapDefinition.add("SE")
@@ -313,6 +363,10 @@ object mapBuilder {
 		if (char == "C") { map.addCarrot(x,y) }
 		if (char == "G") { map.addObstacle(new Obstacle(x,y, assets.get("middleGrass"))) }
 		if (char == "T") { map.addTrap(new Trap(x,y)) }
+		if (char == "V") { map.addBelt(new Belt(x,y, 1)) }
+		if (char == "B") { map.addBelt(new Belt(x,y, 0)) }
+		if (char == "N") { map.addBelt(new Belt(x,y, 2)) }
+		if (char == "M") { map.addBelt(new Belt(x,y, 3)) }
 				
 		if (char == "1") { map.addObstacle(new Obstacle(x,y, assets.get("topLeftFence"))) }
 		if (char == "3") { map.addObstacle(new Obstacle(x,y, assets.get("topRightFence"))) }

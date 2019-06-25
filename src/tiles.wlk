@@ -237,3 +237,35 @@ object remainingCarrotsCounter {
 	}
 }
 */
+
+class Belt {
+	var property position
+	
+	var property beltType = 0
+	
+	constructor(x,y,type) {
+		beltType = type
+		position = new Position(x,y)
+	}
+	
+	constructor(x,y) =  self(new Position(x,y))
+	
+	constructor(_position) { position = _position }
+	
+	method image() = if (beltType == 0) assets.get("leftBelt") else if (beltType == 1) assets.get("rightBelt") else if(beltType == 2) assets.get("downBelt")  else return assets.get("upBelt")
+	
+	method canBeSteppedOn () = true
+	 
+	method reactTo(player){
+		
+		if (beltType == 0) {
+			player.move(player.position().right(1))
+		} else if (beltType == 1) {
+			player.move(player.position().left(1))
+		} else if (beltType == 2) {
+			player.move(player.position().down(1))
+		} else {
+			player.move(player.position().up(1))
+		}
+	}
+}

@@ -6,6 +6,7 @@ class Player {
 	var property position
 	var property collectedCarrots = []
 	var property alive = true
+	var property direction  = 0
 	
 	constructor() = self(new Position(0,0))
 	constructor(x,y) = self(new Position(x,y))
@@ -30,7 +31,12 @@ class Player {
 	method move(nuevaPosicion) {
 		
 		if (alive and self.canMoveTo(nuevaPosicion)) {
+			 
+			 direction =  new Position(nuevaPosicion.x() - self.position().x(), nuevaPosicion.y() - self.position().y())
+			
 			 self.position(nuevaPosicion)	
+			
+			 console.println(direction)
 			 
 			 if (game.colliders(self).size() > 0) {
 			 	game.colliders(self).first().reactTo(self) 
