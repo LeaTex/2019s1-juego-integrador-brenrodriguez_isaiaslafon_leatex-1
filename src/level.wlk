@@ -105,7 +105,6 @@ object levelsList {
 	}
 	
 	method initializeLevels() {
-		levels.add(self.levelEight())
 		levels.add(self.levelOne())
 		levels.add(self.levelTwo())
 		levels.add(self.levelThree())
@@ -113,6 +112,7 @@ object levelsList {
 		levels.add(self.levelFive())
 		levels.add(self.levelSix())
 		levels.add(self.levelSeven())
+		levels.add(self.levelEight())
 	}
 
 	method addExtraLevelForMap(aMap) {
