@@ -172,10 +172,12 @@ class EndPoint {
 		//game.say(self , "Well done!")
 		
 		if (levelComplete) {
+			
 			levelComplete = false
 			game.onTick(1000, "levelComplete", {
-			game.say(player , "Wohooo!") 
-  			gameController.goToNextLevel()
+				game.removeTickEvent("levelComplete")
+				game.say(player , "Wohooo!") 
+  				gameController.goToNextLevel()
 			})
 		}
 
