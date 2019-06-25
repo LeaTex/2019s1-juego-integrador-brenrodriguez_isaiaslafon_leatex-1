@@ -20,6 +20,8 @@ object timer {
 	method boardCorner() = gameController.playingLevel().boardSize().y()
 
 	method updateTime() {
-		game.addVisualIn(self, positions.get(0))
+		self.increase()
 	}
 }
+
+

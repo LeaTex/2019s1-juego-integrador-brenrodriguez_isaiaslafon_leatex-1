@@ -62,23 +62,41 @@ class Grass {
 
 }
 
-class Grabable {
-	var property position
+class BasicGrabbable {
 	const property image
 	
-	constructor(x,y, _image) { 
-		position = new Position (x,y)
+	constructor(_image) { 
 		image = _image
 	}
 
 	method  canBeSteppedOn () = true
 	
-	method reactTo(player){
-		// TODO completar
+	method reactTo(player)
+}
+
+class Grabbable inherits BasicGrabbable{
+	var property position
+	
+	constructor(x,y, _image) = super (_image) { 
+		position = new Position (x,y)
 	}
 }
 
-class Key inherits Grabable {
+
+/*
+class CarrotA inherits BasicGrabbable {
+	const property position
+	
+	constructor(x,y) = super (assets.get("carrot")) { 
+		position = new Position (x,y)
+	}
+	
+	override method reactTo(player) {}
+} 
+*/
+
+
+class Key inherits Grabbable {
 	const property lock
 		
 	constructor(x,y, aLock, _image) = super (x,y,_image) { 
