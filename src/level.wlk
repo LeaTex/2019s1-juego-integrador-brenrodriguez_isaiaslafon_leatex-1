@@ -113,6 +113,7 @@ object levelsList {
 		levels.add(self.levelSix())
 		levels.add(self.levelSeven())
 		levels.add(self.levelEight())
+		levels.add(self.levelNine())
 	}
 
 	method addExtraLevelForMap(aMap) {
@@ -256,7 +257,7 @@ object levelsList {
 	}
 	
 	
-		method levelEight() {
+	method levelEight() {
 		var mapDefinition = []
 
 		mapDefinition.add("GGGGGGGGGGGGG")
@@ -275,6 +276,27 @@ object levelsList {
 	
 		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(8,map)
+	}
+	
+	method levelNine() {
+		var mapDefinition = []
+
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GCCCGGGCCCGGG")
+		mapDefinition.add("GCSCBBBCCCGGG")
+		mapDefinition.add("GCCCGGGCCCGGG")
+		mapDefinition.add("GGNGGGGG GGGG")
+		mapDefinition.add("GGNGGGGG GGGG")
+		mapDefinition.add("G   GGGCCCGGG")
+		mapDefinition.add("G E TCTCCCGGG")
+		mapDefinition.add("G   GGGCCCGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+	
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(9,map)
 	}
 	
 	method emptyLevel() {
@@ -339,6 +361,8 @@ object mapBuilder {
 		if (char == "T") { map.addTrap(new Trap(x,y)) }
 		if (char == "V") { map.addFence(new Belt(x,y, 1)) }
 		if (char == "B") { map.addFence(new Belt(x,y, 0)) }
+		if (char == "N") { map.addFence(new Belt(x,y, 2)) }
+		if (char == "M") { map.addFence(new Belt(x,y, 3)) }
 				
 		if (char == "1") { map.addObstacle(new Obstacle(x,y, assets.get("topLeftFence"))) }
 		if (char == "3") { map.addObstacle(new Obstacle(x,y, assets.get("topRightFence"))) }
