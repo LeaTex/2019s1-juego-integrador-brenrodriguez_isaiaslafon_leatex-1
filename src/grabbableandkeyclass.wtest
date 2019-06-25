@@ -9,6 +9,7 @@ var b= new Lock(1,2, assets.get("goldLock"))
 var c= new Key(1,2,b,assets.get("goldKey"))
 
 	assert.equals(c.position(), new Position(1,2))
+	assert.equals(c.image(), assets.get("goldKey"))
 //	assert.equals(new CarrotA(1,2).image(), assets.get("carrot"))
 
 }
