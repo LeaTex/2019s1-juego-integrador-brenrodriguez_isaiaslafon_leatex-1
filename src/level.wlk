@@ -13,6 +13,8 @@ class Map {
 	var obstacles = []
 	var traps = []
 	var belts = []
+	var keys = []
+	var locks = []
 	
 	constructor(x,y) {
 		boardSize = x->y
@@ -39,8 +41,13 @@ class Map {
 	
 	method addBelt(aBelt) { belts.add(aBelt) }
 	method belts() { return belts }
+	
+	method addKey(aKey) { keys.add(aKey)}
+	
+	method addLock(aLock) {locks.add(aLock)} 
+	//method locks() {return locks}
 
-	method elements() { return carrots + obstacles + traps +  belts}
+	method elements() { return carrots + obstacles + traps +  belts + locks + keys}
 }
 
 /* A Level is a dynamic representation of a Map, with contextual information */
@@ -367,6 +374,11 @@ object mapBuilder {
 		if (char == "B") { map.addBelt(new Belt(x,y, 0)) }
 		if (char == "N") { map.addBelt(new Belt(x,y, 2)) }
 		if (char == "M") { map.addBelt(new Belt(x,y, 3)) }
+		
+		if (char == "K") { map.addKey(new GrabbableKey(x,y,goldLock,assets.get("goldKey")))}
+		if (char == "L") { map.addLock(goldLock)}
+		if (char == "R") { map.addKey(new GrabbableKey(x,y,redLock,assets.get("redKey")))}
+		if (char == "D") { map.addLock(redLock)}
 				
 		if (char == "1") { map.addObstacle(new Obstacle(x,y, assets.get("topLeftFence"))) }
 		if (char == "3") { map.addObstacle(new Obstacle(x,y, assets.get("topRightFence"))) }

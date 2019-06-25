@@ -96,7 +96,7 @@ class CarrotA inherits BasicGrabbable {
 */
 
 
-class Key inherits Grabbable {
+class GrabbableKey inherits Grabbable {
 	const property lock
 		
 	constructor(x,y, aLock, _image) = super (x,y,_image) { 
@@ -104,7 +104,7 @@ class Key inherits Grabbable {
 	}
 
 	override method reactTo(player){
-		lock.remove()
+		game.removeVisual(lock)
 		game.removeVisual(self)
 	}
 }
@@ -122,9 +122,9 @@ object goldLock inherits Lock(0,0, assets.get("goldLock")) {}
 object silverLock inherits Lock(0,0, assets.get("silverLock")) {}
 object redLock inherits Lock(0,0, assets.get("redLock")) {}
 
-object goldKey inherits Key(0,0, goldLock, assets.get("goldKey")) {}
-object silverKey inherits Key(0,0, silverLock, assets.get("silverKey")) {}
-object redKey inherits Key(0,0, redLock, assets.get("redKey")) {}
+object goldKey inherits GrabbableKey(0,0, goldLock, assets.get("goldKey")) {}
+object silverKey inherits GrabbableKey(0,0, silverLock, assets.get("silverKey")) {}
+object redKey inherits GrabbableKey(0,0, redLock, assets.get("redKey")) {}
 
 
 
