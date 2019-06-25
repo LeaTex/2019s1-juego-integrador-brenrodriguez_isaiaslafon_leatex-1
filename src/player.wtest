@@ -9,11 +9,11 @@ describe "Test del player" {
 	var map
 	var level
 	var fencePosition = new Position(10,11)
-	var trap = new Trap(new Position(8,6))
+	var trap = new Trap(new Position(8,6))	
 	
 	fixture {
 		map = new Map(10,10)
-		map.addFence(new Fence(fencePosition, fenceType.horizontal()))
+		map.addObstacle(new Fence(fencePosition, fenceType.horizontal()))
 		map.addTrap(trap)
 		map.startPosition(0,0)
 		level = new Level(1,map)
