@@ -23,8 +23,7 @@ class Obstacle inherits BasicObstacle{
 		
 }
 
-class Fence {
-	var property position
+class Fence inherits GameObject {
 	var property image
 	
 	constructor() = self(game.center().x(), game.center().y(), fenceType.lonelyGrass())
@@ -36,7 +35,8 @@ class Fence {
 		image = _image
 	}
 		
-	method canBeSteppedOn() = false
+	override method canBeSteppedOn() = false
+	override method image() = image
 }
 
 object fenceType {
@@ -128,18 +128,14 @@ object redKey inherits GrabbableKey(0,0, redLock, assets.get("redKey")) {}
 
 
 
-class Carrot {
-	var property position
 
-	constructor() = self(game.center())
-	constructor(x,y) = self(new Position(x,y))
-	constructor(_position) { position = _position }
+class Carrot inherits GameObject {
 
-	method image() = assets.get("carrot")
+	override method image() = assets.get("carrot")
 
-	method  canBeSteppedOn () = true
+	override method  canBeSteppedOn () = true
 	
-	method reactTo(player){
+	override method reactTo(player){
 		game.removeVisual(self)
 		game.addVisual(new Hole(position = self.position()))
 		player.collectCarrot(self)
@@ -148,26 +144,20 @@ class Carrot {
 }
 
 	
-class EndPoint {
-	var property position
-	var image = assets.get("endPointOff")
+class EndPoint inherits GameObject {
 	var levelComplete = false
-	constructor() = self(game.center())
-	constructor(x,y) = self(new Position(x,y))
-	constructor(_position) { position = _position }
 	
-	method image() = image 
+	override method image() = if (levelComplete) assets.get("endPointOn") else return assets.get("endPointOff")
 	
 	method endPointOn() {
-		image = assets.get("endPointOn")
 		levelComplete = true
 	}
+	
 	method endPointOff() {
-		image = assets.get("endPointOff")
 		levelComplete = false
 	}	
 
-	method reactTo(player){
+	override method reactTo(player){
 		//go to next levelimage
 		//game.say(self , "Well done!")
 		
@@ -183,37 +173,40 @@ class EndPoint {
 
 	}
 	
-	method  canBeSteppedOn () = true
+	override method  canBeSteppedOn () = true
 }
 
-class Trap { 
+class Trap inherits GameObject { 
+	
 	var property activated = false 
-	var property position 
+	 	
+	override method image() = if (activated) assets.get("spikesUp") else assets.get("spikesDown") 
 	 
-	constructor() = self(game.center())
-	constructor(x,y) = self(new Position(x,y))
-	constructor(_position) { position = _position }
+	override method  canBeSteppedOn () = true 
 	 
-	method image() = if (activated) assets.get("spikesUp") else assets.get("spikesDown") 
-	 
-	method  canBeSteppedOn () = true 
-	 
-	method reactTo(player) { 
+	override method reactTo(player) { 
 		 
 		if (self.activated()) { 
 			player.receivedDamage()		 
 		} 
+		
 		self.activated(true) 
 	}
 } 
 
-class Hole {
+class GameObject {
 	var property position
+	constructor() = self(game.center())
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
-	method image() = assets.get("groundHole")
-	method canBeSteppedOn () = true 
+	method image() = ""
+	method canBeSteppedOn () = false 
 	method reactTo(player){}
+}
+
+class Hole inherits GameObject {
+	override method image() = assets.get("groundHole")
+	override method canBeSteppedOn () = true 
 }
 
 /*
@@ -240,9 +233,8 @@ object remainingCarrotsCounter {
 }
 */
 
-class Belt {
-	var property position
-	
+class Belt inherits GameObject {
+
 	var property beltType = 0
 	
 	constructor(x,y,type) {
@@ -250,15 +242,14 @@ class Belt {
 		position = new Position(x,y)
 	}
 	
-	constructor(x,y) =  self(new Position(x,y))
 	
 	constructor(_position) { position = _position }
 	
-	method image() = if (beltType == 0) assets.get("leftBelt") else if (beltType == 1) assets.get("rightBelt") else if(beltType == 2) assets.get("downBelt")  else return assets.get("upBelt")
+	override method image() = if (beltType == 0) assets.get("leftBelt") else if (beltType == 1) assets.get("rightBelt") else if(beltType == 2) assets.get("downBelt")  else return assets.get("upBelt")
 	
-	method canBeSteppedOn () = true
+	override method canBeSteppedOn () = true
 	 
-	method reactTo(player){
+	override method reactTo(player){
 		
 		if (beltType == 0) {
 			player.move(player.position().right(1))
