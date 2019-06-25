@@ -12,6 +12,7 @@ class Map {
 	var carrots = []
 	var obstacles = []
 	var traps = []
+	var belts = []
 	
 	constructor(x,y) {
 		boardSize = x->y
@@ -35,8 +36,11 @@ class Map {
 
 	method addTrap(aTrap) { traps.add(aTrap) }
 	method traps() { return traps }
+	
+	method addBelt(aBelt) { belts.add(aBelt) }
+	method belts() { return belts }
 
-	method elements() { return carrots + obstacles + traps }
+	method elements() { return carrots + obstacles + traps +  belts}
 }
 
 /* A Level is a dynamic representation of a Map, with contextual information */
@@ -359,10 +363,10 @@ object mapBuilder {
 		if (char == "C") { map.addCarrot(x,y) }
 		if (char == "G") { map.addObstacle(new Obstacle(x,y, assets.get("middleGrass"))) }
 		if (char == "T") { map.addTrap(new Trap(x,y)) }
-		if (char == "V") { map.addFence(new Belt(x,y, 1)) }
-		if (char == "B") { map.addFence(new Belt(x,y, 0)) }
-		if (char == "N") { map.addFence(new Belt(x,y, 2)) }
-		if (char == "M") { map.addFence(new Belt(x,y, 3)) }
+		if (char == "V") { map.addBelt(new Belt(x,y, 1)) }
+		if (char == "B") { map.addBelt(new Belt(x,y, 0)) }
+		if (char == "N") { map.addBelt(new Belt(x,y, 2)) }
+		if (char == "M") { map.addBelt(new Belt(x,y, 3)) }
 				
 		if (char == "1") { map.addObstacle(new Obstacle(x,y, assets.get("topLeftFence"))) }
 		if (char == "3") { map.addObstacle(new Obstacle(x,y, assets.get("topRightFence"))) }
