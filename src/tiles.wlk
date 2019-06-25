@@ -234,27 +234,20 @@ class Belt {
 	
 	constructor(_position) { position = _position }
 	
-	method image() = if (beltType == 0) assets.get("leftBelt") else return assets.get("rightBelt")
+	method image() = if (beltType == 0) assets.get("leftBelt") else if (beltType == 1) assets.get("rightBelt") else if(beltType == 2) assets.get("downBelt")  else return assets.get("upBelt")
 	
 	method canBeSteppedOn () = true
 	 
 	method reactTo(player){
+		
 		if (beltType == 0) {
-			if (player.direction().x() > 0) { //derecha
-				player.move(player.position().right(1))
-			} else {
-				player.move(player.position().right(1))
-			}
+			player.move(player.position().right(1))
 		} else if (beltType == 1) {
-			if (player.direction().x() < 0) { //derecha
-				player.move(player.position().left(1))
-			} else {
-				player.move(player.position().left(1))
-			}
+			player.move(player.position().left(1))
 		} else if (beltType == 2) {
-			
+			player.move(player.position().down(1))
 		} else {
-			
+			player.move(player.position().up(1))
 		}
 	}
 }
