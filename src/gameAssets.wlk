@@ -63,7 +63,7 @@ object assets {
 			//Transport Belts:
 			tempGraphics.put("upBelt","./tiles/belts/upBelt.png")
 			tempGraphics.put("downBelt","./tiles/belts/downBelt.png")
-			tempGraphics.put("leftBelt","./tiles/belts/leftBelt.png")
+			tempGraphics.put("leftBelt","./tiles/belts/leftBet.png")
 			tempGraphics.put("rightBelt","./tiles/belts/rightBelt.png")
 			
 			//Locks
