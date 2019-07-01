@@ -134,7 +134,7 @@ object levelsList {
 		levels.add(self.levelTen())
 		levels.add(self.levelEleven())
 		levels.add(self.levelTwelve())
-		levels.add(self.levelTherteen())
+		levels.add(self.levelThirteen())
 	}
 
 	method addExtraLevelForMap(aMap) {
@@ -382,7 +382,7 @@ object levelsList {
 		return new Level(12,map)
 	}
 	
-		method levelTherteen() {
+		method levelThirteen() {
 		var mapDefinition = []
 		mapDefinition.add("GGGGGGGGGGGGG")
 		mapDefinition.add("GGGGGGGGGGGGG")
