@@ -207,6 +207,27 @@ class Trap {
 	}
 } 
 
+class Runway{
+	var property position
+	var property isVerticalPosition = true
+	
+	constructor() = self(game.center())
+	constructor(x,y) = self(new Position(x,y))
+	constructor(_position){position = _position}
+	
+	method image() = if (isVerticalPosition) assets.get("verticalRunway") else assets.get("horizontalRunway")
+	
+	method canBeSteppedOn () = true
+	
+	method reactTo(player){
+		if(self.isVerticalPosition()){
+			self.isVerticalPosition(false)
+		} else{
+			self.isVerticalPosition(true)
+		}
+	}
+ }
+
 class Hole {
 	var property position
 	constructor(x,y) = self(new Position(x,y))

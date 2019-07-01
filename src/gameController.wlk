@@ -20,6 +20,7 @@ object gameController {
 		keyboard.q().onPressDo { game.stop() } // quit
 		keyboard.r().onPressDo { self.restartLevel() } // restart level
 		keyboard.n().onPressDo { self.goToNextLevel() } // next level
+//		keyboard.p().onPressDo {self.goToPreviousLevel() } //prev level
 		keyboard.h().onPressDo { self.showHelp() } // help
 	}
 	method initializePlayerKeyboard() {
@@ -38,7 +39,7 @@ object gameController {
 	method goToNextLevel() {
 		self.initializeGameForLevel(playingLevel.nextLevel())
 	}
-
+	
 	method initializeGameForLevel(aLevel) {
 		game.clear()
 		playingLevel = aLevel

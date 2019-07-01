@@ -9,6 +9,7 @@ class Map {
 	var boardSize
 	var startPosition
 	var endPoint
+	var runways = []
 	var carrots = []
 	var obstacles = []
 	var traps = []
@@ -30,6 +31,9 @@ class Map {
 	method endPoint(x,y) { endPoint = new EndPoint(x,y) }
 	method endPoint() { return endPoint }
 	
+	method addRunway(aRunway){runways.add(aRunway) }
+	method runways(){return runways}
+	
 	method addCarrot(x,y) { carrots.add(new Carrot(x,y)) }
 	method carrots() { return carrots }
 	
@@ -47,7 +51,8 @@ class Map {
 	method addLock(aLock) {locks.add(aLock)} 
 	//method locks() {return locks}
 
-	method elements() { return carrots + obstacles + traps +  belts + locks + keys}
+	method elements() { return carrots + obstacles + traps +  belts + locks + keys + runways}
+	
 }
 
 /* A Level is a dynamic representation of a Map, with contextual information */
@@ -67,7 +72,6 @@ class Level {
 		// game.height(map.boardSize().y())
 
 		map.elements().forEach{ e => game.addVisual(e) }
-		
 		game.addVisual(map.endPoint())
 		game.addVisual(bunny)
 	}
@@ -76,6 +80,7 @@ class Level {
 		bunny.restartAt(map.startPosition())
 		map.endPoint().endPointOff()
 		map.traps().forEach{ t => t.activated(false) }
+		map.runways().forEach{r => r.isVerticalPosition(true)}
 	}
 	
 	method map() = map
@@ -98,6 +103,7 @@ class Level {
 	}
 	
 	method nextLevel() {return levelsList.level(levelNumber+1)}
+	
 }
 
 /* A WKO with a hardcoded list of level to play */
@@ -125,6 +131,10 @@ object levelsList {
 		levels.add(self.levelSeven())
 		levels.add(self.levelEight())
 		levels.add(self.levelNine())
+		levels.add(self.levelTen())
+		levels.add(self.levelEleven())
+		levels.add(self.levelTwelve())
+		levels.add(self.levelTherteen())
 	}
 
 	method addExtraLevelForMap(aMap) {
@@ -310,6 +320,88 @@ object levelsList {
 		return new Level(9,map)
 	}
 	
+	method levelTen() {
+		var mapDefinition = []
+
+		mapDefinition.add("GGGG  E  GGGG")
+		mapDefinition.add("GGGG     GGGG")
+		mapDefinition.add("GGGGT4T4TGGGG")
+		mapDefinition.add("GGGCC4C4CCGGG")
+		mapDefinition.add("GGGCC4N4CCGGG")
+		mapDefinition.add("GGGCC4C4CCGGG")
+		mapDefinition.add("GGGT79T79TGGG")	
+		mapDefinition.add("             ")
+		mapDefinition.add("GGGGGGMGGGGGG")
+		mapDefinition.add("GGGGGGMGGGGGG")
+		mapDefinition.add("GGGGG   GGGGG")
+		mapDefinition.add("GGGGG S GGGGG")
+		mapDefinition.add("GGGGGCCCGGGGG")
+	
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(10,map)
+	}
+	
+	method levelEleven() {
+		var mapDefinition = []
+
+		mapDefinition.add("GGGCC E CCGGG")
+		mapDefinition.add("GGG729 729GGG")
+		mapDefinition.add("T           T")
+		mapDefinition.add("CGGGT4T4TGGGC")
+		mapDefinition.add("CVVVC4C4CVVVC")
+		mapDefinition.add("CGGG79T79GGGC")
+		mapDefinition.add("T           T")	
+		mapDefinition.add("GGGG     GGGG")
+		mapDefinition.add("GGGGGGMGGGGGG")
+		mapDefinition.add("GGGGGGMGGGGGG")
+		mapDefinition.add("GGGGG   GGGGG")
+		mapDefinition.add("GGGGG S GGGGG")
+		mapDefinition.add("GGGGGCCCGGGGG")
+	
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(11,map)
+	}
+	
+	method levelTwelve() {
+		var mapDefinition = []
+		mapDefinition.add("GGGGGGGCCCGGGG")
+		mapDefinition.add("G  GGGGCCC   G")
+		mapDefinition.add("G TVV  CCCGG G")
+		mapDefinition.add("G  GGMGGNGGG G")
+		mapDefinition.add("G  GGMGGNGGG G")
+		mapDefinition.add("  TBB TCCCGGTT")	
+		mapDefinition.add("S   729CCCGGTE")
+		mapDefinition.add("  TVV TCCCGGTT")
+		mapDefinition.add("G  GGGGGGGGG G")
+		mapDefinition.add("G  GGGGGGGGG G")
+		mapDefinition.add("G TBBT CCCGG G")
+		mapDefinition.add("G  GGG CCC   G")
+		mapDefinition.add("GGGGGG CCCGGGG")
+	
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(12,map)
+	}
+	
+		method levelTherteen() {
+		var mapDefinition = []
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGG CCC GG")
+		mapDefinition.add("GGGGGG GGG GG")
+		mapDefinition.add("GGGGGG GGG GG")
+		mapDefinition.add("G   GG GG   G")
+		mapDefinition.add("G S TCUCT E G")
+		mapDefinition.add("G   GG GG   G")
+		mapDefinition.add("GG GGG GGGGGG")
+		mapDefinition.add("GG GGG GGGGGG")
+		mapDefinition.add("GG CCC GGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
+	
+		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		return new Level(13,map)
+	}
+	
 	method emptyLevel() {
 		var mapDefinition = []
 		mapDefinition.add("SE")
@@ -367,6 +459,7 @@ object mapBuilder {
 	method addElementAccordingTo(char, y, x) {
 		if (char == "S") { map.startPosition(x,y) }
 		if (char == "E") { map.endPoint(x,y) }
+		if (char == "U") { map.addRunway(new Runway(x,y))}
 		if (char == "C") { map.addCarrot(x,y) }
 		if (char == "G") { map.addObstacle(new Obstacle(x,y, assets.get("middleGrass"))) }
 		if (char == "T") { map.addTrap(new Trap(x,y)) }

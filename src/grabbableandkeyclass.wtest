@@ -6,7 +6,7 @@ test "testX" {
 
 //var a = new Grabbable(1,2, assets.get("carrot"))
 var b= new Lock(1,2, assets.get("goldLock"))
-var c= new Key(1,2,b,assets.get("goldKey"))
+var c= new GrabbableKey(1,2,b,assets.get("goldKey"))
 
 	assert.equals(c.position(), new Position(1,2))
 	assert.equals(c.image(), assets.get("goldKey"))

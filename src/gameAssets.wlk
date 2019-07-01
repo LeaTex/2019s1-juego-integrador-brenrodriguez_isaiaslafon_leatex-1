@@ -51,14 +51,14 @@ object assets {
 		//dynamicObstacles:
 			//Runaways:
 				//L shape:
-				tempGraphics.put("leftDownRunaway","./tiles/runaways/leftDownRunaway.png")
-				tempGraphics.put("leftUpRunaway","./tiles/runaways/leftUpRunaway.png")
-				tempGraphics.put("rightUpRunaway","./tiles/runaways/rightUpRunaway.png")
-				tempGraphics.put("rightDownRunaway","./tiles/runaways/rightDownRunaway.png")
+				tempGraphics.put("leftDownRunway","./tiles/runway/leftDownRunway.png")
+				tempGraphics.put("leftUpRunway","./tiles/runway/leftUpRunway.png")
+				tempGraphics.put("rightUpRunway","./tiles/runway/rightUpRunway.png")
+				tempGraphics.put("rightDownRunway","./tiles/runway/rightDownRunway.png")
 				
 				//Straight Shape:
-				tempGraphics.put("horizontalRunaway","./tiles/runaways/horizontalRunaway.png")
-				tempGraphics.put("vertcalRunaway","./tiles/runaways/verticalRunaway.png")
+				tempGraphics.put("horizontalRunway","./tiles/runway/horizontalRunway.png")
+				tempGraphics.put("verticalRunway","./tiles/runway/verticalRunway.png")
 				
 			//Transport Belts:
 			tempGraphics.put("upBelt","./tiles/belts/upBelt.png")
