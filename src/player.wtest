@@ -2,6 +2,7 @@ import wollok.game.*
 import tiles.*
 import level.*
 import gameController.*
+import gameAssets.*
 
 describe "Test del player" {
 	
@@ -13,7 +14,7 @@ describe "Test del player" {
 	
 	fixture {
 		map = new Map(10,10)
-		map.addObstacle(new Fence(fencePosition, fenceType.horizontal()))
+		map.addObstacle(new Obstacle(fencePosition, assets.get("horizontalFence")))
 		map.addTrap(trap)
 		map.startPosition(0,0)
 		level = new Level(1,map)

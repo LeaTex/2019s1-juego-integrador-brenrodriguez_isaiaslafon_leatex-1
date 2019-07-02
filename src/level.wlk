@@ -9,13 +9,13 @@ class Map {
 	var boardSize
 	var startPosition
 	var endPoint
-	var runways = []
-	var carrots = []
-	var obstacles = []
-	var traps = []
-	var belts = []
-	var keys = []
-	var locks = []
+	const runways = []
+	const carrots = []
+	const obstacles = []
+	const traps = []
+	const belts = []
+	const keys = []
+	const locks = []
 	
 	constructor(x,y) {
 		boardSize = x->y

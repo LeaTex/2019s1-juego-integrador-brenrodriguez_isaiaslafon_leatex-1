@@ -1,6 +1,7 @@
 import wollok.game.*
 import level.*
 import tiles.*
+import gameAssets.*
 
 describe "tests para maps y niveles" {
 
@@ -28,9 +29,9 @@ describe "tests para maps y niveles" {
 
 	test "el mapa tiene 3 paredes" {
 		var map = new Map(10,10)
-		map.addFence(new Fence(new Position(6,7), fenceType.horizontal()))
-		map.addFence(new Fence(new Position(7,8), fenceType.horizontal()))
-		map.addFence(new Fence(new Position(8,9), fenceType.horizontal()))
+		map.addObstacle(new Obstacle(new Position(6,7), assets.get("horizontalFence")))
+		map.addObstacle(new Obstacle(new Position(7,8), assets.get("horizontalFence")))
+		map.addObstacle(new Obstacle(new Position(8,9), assets.get("horizontalFence")))
 		
 		assert.equals(map.elements().size(), 3)	
 	}

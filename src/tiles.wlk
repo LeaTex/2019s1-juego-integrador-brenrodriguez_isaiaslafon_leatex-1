@@ -23,45 +23,6 @@ class Obstacle inherits BasicObstacle{
 		
 }
 
-class Fence {
-	var property position
-	var property image
-	
-	constructor() = self(game.center().x(), game.center().y(), fenceType.lonelyGrass())
-	
-	constructor(x,y) =	self(x,y,fenceType.lonelyGrass())
-	
-	constructor(x,y, _image) { 
-		position =  new Position(x,y)
-		image = _image
-	}
-		
-	method canBeSteppedOn() = false
-}
-
-object fenceType {
-	method horizontal() = "./tiles/fences/horizontalFence.png" 
-	method vertical() = "./tiles/fences/verticalFence.png" 
-	method bottomLeft()  =  "./tiles/fences/bottomLeftFence.png"
-	method bottomRight() =  "./tiles/fences/bottomRightFence.png"
-	method topLeft()  =  "./tiles/fences/topLeftFence.png"
-	method topRight()  =  "./tiles/fences/topRightFence.png"
-	method lonelyGrass() = "./tiles/grass/lonelyGrass.png"
-}
-
-class Grass {
-	const property position
-
-	constructor() = self(game.center())
-	constructor(x,y) = self(new Position(x,y))
-	constructor(_position) { position = _position }
-
-	method image() = "./tiles/grass/middleGrass.png"
-
-	method canBeSteppedOn() = false
-
-}
-
 class BasicGrabbable {
 	const property image
 	
