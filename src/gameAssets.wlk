@@ -75,9 +75,11 @@ object assets {
 				//Left Tile Digits
 				(0..9).forEach({number => tempGraphics.put("hudLTLD" + number.toString() ,"./hud/leftTileLeftDigit/hud"+ number.toString() + ".png")})
 				(0..9).forEach({number => tempGraphics.put("hudLTRD" + number.toString() ,"./hud/leftTileRightDigit/hud"+ number.toString() + ".png")})
+
 				//Right Tile Digits
 				(0..9).forEach({number => tempGraphics.put("hudRTLD" + number.toString() ,"./hud/rightTileLeftDigit/hud"+ number.toString() + ".png")})	
 				(0..9).forEach({number => tempGraphics.put("hudRTRD" + number.toString() ,"./hud/rightTileRightDigit/hud"+ number.toString() + ".png")})
+
 				//Colon:
 				tempGraphics.put("hudColonLeft", "./hud/hudColonLeft.png")
 				tempGraphics.put("hudColonRight", "./hud/hudColonRight.png")
