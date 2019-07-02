@@ -71,6 +71,27 @@ object assets {
 			tempGraphics.put("silverLock","./tiles/locks/silverLock.png")
 			tempGraphics.put("redLock","./tiles/locks/redLock.png")
 			
+			//HUD
+				//Left Tile Digits
+				(0..9).forEach({number => tempGraphics.put("hudLTLD" + number.toString() ,"./hud/leftTileLeftDigit/hud"+ number.toString() + ".png")})
+				(0..9).forEach({number => tempGraphics.put("hudLTRD" + number.toString() ,"./hud/leftTileRightDigit/hud"+ number.toString() + ".png")})
+				//Right Tile Digits
+				(0..9).forEach({number => tempGraphics.put("hudRTLD" + number.toString() ,"./hud/rightTileLeftDigit/hud"+ number.toString() + ".png")})	
+				(0..9).forEach({number => tempGraphics.put("hudRTRD" + number.toString() ,"./hud/rightTileRightDigit/hud"+ number.toString() + ".png")})
+				//Colon:
+				tempGraphics.put("hudColonLeft", "./hud/hudColonLeft.png")
+				tempGraphics.put("hudColonRight", "./hud/hudColonRight.png")
+				
+				//Hud Keys
+				tempGraphics.put("hudLTSilverKey", "./hud/keys/hudSilverLeft.png")
+				tempGraphics.put("hudLTGoldKey", "./hud/keys/hudGoldKeyLeft.png")
+				tempGraphics.put("hudRTRedKey", "./hud/keys/hudRedKeyRight.png")
+				
+				//Collectables
+				tempGraphics.put("hudEasterEgg", "./hud/collectables/hudEasterEgg.png")
+				tempGraphics.put("hudCarrot", "./hud/collectables/hudCarrot.png")
+				
+			
 			return tempGraphics
 	}
 
