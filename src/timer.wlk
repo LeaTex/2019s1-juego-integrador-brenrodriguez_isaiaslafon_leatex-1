@@ -2,6 +2,7 @@ import level.*
 import gameController.*
 import wollok.game.*
 
+//the timer is incomplete
 object timer {
 	var seconds = 0 
 	const positions = [ new Position(0,self.boardCorner()), new Position(1,self.boardCorner()) ]

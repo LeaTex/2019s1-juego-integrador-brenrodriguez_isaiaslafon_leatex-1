@@ -3,6 +3,8 @@ import tiles.*
 import player.*
 import gameAssets.*
 
+const isSamePosition = {aPosition , bPosition => aPosition.x() == bPosition.x()	and aPosition.y() == bPosition.y() }
+
 /* A Map defines the initial view of a Level. It describes the size of the playground
  * and the position of the elements */
 class Map {
@@ -22,6 +24,7 @@ class Map {
 		startPosition = null
 		endPoint = null
 	}
+	
 	method boardSize(x,y) { boardSize = x->y }
 	method boardSize() { return boardSize }
 
@@ -71,15 +74,29 @@ class Level {
 		// game.width(map.boardSize().x())
 		// game.height(map.boardSize().y())
 
-		map.elements().forEach{ e => game.addVisual(e) }
+		self.makeHoles() //if not created on every carrot cause is not render until the map loads.
+		map.elements().forEach{ e => game.addVisual(e)	}
 		game.addVisual(map.endPoint())
 		game.addVisual(bunny)
 	}
 	
+	
+	method makeHoles() {
+		map.carrots().map({aCarrot => aCarrot.position()}).forEach{ aPosition => game.addVisual(new Hole(aPosition))}
+	}
+	
+	method updateTiles(aPosition,aListOfTiles) {
+			aListOfTiles.forEach({aTile => if (isSamePosition.apply(aTile.position(),aPosition)) aTile.change() })
+	}
+	
+	method updateTraps(aPosition) {	
+		self.updateTiles(aPosition, map.traps())
+	}
+	
 	method restart() {
-		bunny.restartAt(map.startPosition())
+		bunny.resetAt(map.startPosition())
 		map.endPoint().endPointOff()
-		map.traps().forEach{ t => t.activated(false) }
+		map.traps().forEach{ t => t.disable() }
 		map.runways().forEach{r => r.isVerticalPosition(true)}
 	}
 	
@@ -92,10 +109,11 @@ class Level {
 	method initialCarrotsAmount() { return map.carrots().size() }
 	
 	method collectedCarrotsAmount() {
-		return bunny.collectedCarrots().size()
+		return bunny.collected()
 	}
+	
 	method remainingCarrotsAmount() {
-		return self.initialCarrotsAmount() - bunny.collectedCarrots().size()
+		return self.initialCarrotsAmount() - bunny.collected()
 	}
 
 	method areAllCarrotsCollected() {
@@ -143,7 +161,7 @@ object levelsList {
 	}
 	
 	method levelOne() {
-		var mapDefinition = []
+		const mapDefinition = []
 		mapDefinition.add("GG   GG")
 		mapDefinition.add("   E   ")
 		mapDefinition.add(" 12223 ")
@@ -154,13 +172,12 @@ object levelsList {
 		mapDefinition.add("       ")
 		mapDefinition.add("   S   ")
 		mapDefinition.add("GG   GG")
-					 
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
-
-		return new Level(1,map)
+		
+		const map =	mapBuilder.buildMapFromMatrix(mapDefinition)	 
+		return new Level(1, map)
 	}
 	method levelTwo() {
-		var mapDefinition = []
+		const mapDefinition = []
 			
 		mapDefinition.add("GGG E GGG")
 		mapDefinition.add("         ")
@@ -174,12 +191,12 @@ object levelsList {
 		mapDefinition.add("GGG S GGG")
 		mapDefinition.add("GGG   GGG")
 		
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		const map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(2,map)
 	}
 
 	method levelThree() {
-		var mapDefinition = []
+		const mapDefinition = []
 		mapDefinition.add("GGG GGG")
 		mapDefinition.add("GG E GG")
 		mapDefinition.add("       ")
@@ -193,12 +210,12 @@ object levelsList {
 		mapDefinition.add("GG S GG")
 		mapDefinition.add("GG   GG")
 		
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		const map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(3,map)
 	}
 
 	method levelFour() {
-		var mapDefinition = []
+		const mapDefinition = []
 			
 		mapDefinition.add("GG 122222223")
 		mapDefinition.add("GG 4CCC4CCC6")
@@ -210,12 +227,12 @@ object levelsList {
 		mapDefinition.add("   4CCC4CCC6")
 		mapDefinition.add("GG 788888889")
 		
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		const map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(4,map)
 	}
 	
 	method levelFive() {
-		var mapDefinition = []
+		const mapDefinition = []
 			
 		mapDefinition.add("GGGGGG GGGGGG")
 		mapDefinition.add("GGGGG E GGGGG")
@@ -231,12 +248,12 @@ object levelsList {
 		mapDefinition.add("GGGGG S GGGGG")
 		mapDefinition.add("GGGGG   GGGGG")
 
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		const map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(5,map)
 	}
 
 	method levelSix() {
-		var mapDefinition = []
+		const mapDefinition = []
 		
 		mapDefinition.add("GGGGGGG   GGG")
 		mapDefinition.add("GC  T   E GGG")
@@ -252,12 +269,12 @@ object levelsList {
 		mapDefinition.add(" S     CTC  G")
 		mapDefinition.add("   GG  CCC  G")
 		
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		const map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(6,map)
 	}
 
 	method levelSeven() {
-		var mapDefinition = []
+		const mapDefinition = []
 
 		mapDefinition.add("CCCGGCCCGGCCC")
 		mapDefinition.add("CC TT C TT CC")
@@ -273,13 +290,13 @@ object levelsList {
 		mapDefinition.add(" S TT C TT CC")
 		mapDefinition.add("   GGCCCGGCCC")
 		
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		const map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(7,map)
 	}
 	
 	
 	method levelEight() {
-		var mapDefinition = []
+		const mapDefinition = []
 
 		mapDefinition.add("GGGGGGGGGGGGG")
 		mapDefinition.add("GGGGGGGGGGGGG")
@@ -295,12 +312,12 @@ object levelsList {
 		mapDefinition.add("GGGGGGGGGGGGG")
 		mapDefinition.add("GGGGGGGGGGGGG")
 	
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		const map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(8,map)
 	}
 	
 	method levelNine() {
-		var mapDefinition = []
+		const mapDefinition = []
 
 		mapDefinition.add("GGGGGGGGGGGGG")
 		mapDefinition.add("GGGGGGGGGGGGG")
@@ -316,12 +333,12 @@ object levelsList {
 		mapDefinition.add("GGGGGGGGGGGGG")
 		mapDefinition.add("GGGGGGGGGGGGG")
 	
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		const map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(9,map)
 	}
 	
 	method levelTen() {
-		var mapDefinition = []
+		const mapDefinition = []
 
 		mapDefinition.add("GGGG  E  GGGG")
 		mapDefinition.add("GGGG     GGGG")
@@ -337,12 +354,12 @@ object levelsList {
 		mapDefinition.add("GGGGG S GGGGG")
 		mapDefinition.add("GGGGGCCCGGGGG")
 	
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		const map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(10,map)
 	}
 	
 	method levelEleven() {
-		var mapDefinition = []
+		const mapDefinition = []
 
 		mapDefinition.add("GGGCC E CCGGG")
 		mapDefinition.add("GGG729 729GGG")
@@ -358,12 +375,12 @@ object levelsList {
 		mapDefinition.add("GGGGG S GGGGG")
 		mapDefinition.add("GGGGGCCCGGGGG")
 	
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		const map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(11,map)
 	}
 	
 	method levelTwelve() {
-		var mapDefinition = []
+		const mapDefinition = []
 		mapDefinition.add("GGGGGGGCCCGGGG")
 		mapDefinition.add("G  GGGGCCC   G")
 		mapDefinition.add("G TVV  CCCGG G")
@@ -378,12 +395,12 @@ object levelsList {
 		mapDefinition.add("G  GGG CCC   G")
 		mapDefinition.add("GGGGGG CCCGGGG")
 	
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		const map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(12,map)
 	}
 	
 		method levelThirteen() {
-		var mapDefinition = []
+		const mapDefinition = []
 		mapDefinition.add("GGGGGGGGGGGGG")
 		mapDefinition.add("GGGGGGGGGGGGG")
 		mapDefinition.add("GGGGGG CCC GG")
@@ -395,26 +412,23 @@ object levelsList {
 		mapDefinition.add("GG GGG GGGGGG")
 		mapDefinition.add("GG GGG GGGGGG")
 		mapDefinition.add("GG CCC GGGGGG")
-		mapDefinition.add("GGGGGGGGGGGGGG")
+		mapDefinition.add("GGGGGGGGGGGGG")
 		mapDefinition.add("GGGGGGGGGGGGG")
 	
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		const map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(13,map)
 	}
 	
 	method emptyLevel() {
-		var mapDefinition = []
+		const mapDefinition = []
 		mapDefinition.add("SE")
-		var map = mapBuilder.buildMapFromMatrix(mapDefinition)
+		const map = mapBuilder.buildMapFromMatrix(mapDefinition)
 		return new Level(0,map)
 	}
 
 	method maxPlaygroundSize() {
-		var maxWidth
-		var maxHeight
-
-		maxWidth = self.levels().map({ l => l.map().boardSize().x() }).max()
-		maxHeight = self.levels().map({ l => l.map().boardSize().y() }).max()
+		const maxWidth = self.levels().map({ l => l.map().boardSize().x() }).max()
+		const maxHeight = self.levels().map({ l => l.map().boardSize().y() }).max()
 		
 		return maxWidth -> maxHeight  
 		
@@ -427,21 +441,29 @@ object mapBuilder {
 		C	carrot 
 		G	grass
 		T	trap
+		
 		Fences:
 		1 2 3 = top left, horizontal and top right. 
 		4   6 = vertical fence
 		7 8 9 = bottom left, horizontal and bottom right
+		
+		Belts:
+		V 	Right Belt
+		B   Left Belt
+		N   Down Belt
+		M   Up Belt
 	 */
+	 
 	var map
 
 	method buildMapFromMatrix(aMatrix) {
-		var width = aMatrix.first().length()
-		var height = aMatrix.size()
+		const width = aMatrix.first().length()
+		const height = aMatrix.size()
 		
 		map = new Map(width, height)
 		
-		var rows = 0 .. (height -1)
-		var columns = 0 .. (width -1)
+		const rows = 0 .. (height -1)
+		const columns = 0 .. (width -1)
 		
 		rows.forEach({ row => 
 			columns.forEach({ column => 

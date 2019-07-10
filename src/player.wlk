@@ -1,18 +1,20 @@
 import wollok.game.*
 import level.*
+import gameAssets.*
 import gameController.*
 
 class Player {
 	var property position
-	var property collectedCarrots = []
 	var property alive = true
 	var property direction  = 0
+	var collected = 0
 	
 	constructor() = self(new Position(0,0))
 	constructor(x,y) = self(new Position(x,y))
-	constructor(_position) { position = _position }
+	constructor(_position) { position = _position 
+	}
 
-	method image() = if (alive) "./bobby/bobby.png" else "./bobby/deadBobby.png"
+	method image() = if (alive) assets.get("bobby") else assets.get("deadBobby")
 	
 	method canMoveTo(newPosition) {
 		
@@ -31,42 +33,35 @@ class Player {
 	method move(nuevaPosicion) {
 		
 		if (alive and self.canMoveTo(nuevaPosicion)) {
-			 
+			 const previousPosition = position
 			 direction =  new Position(nuevaPosicion.x() - self.position().x(), nuevaPosicion.y() - self.position().y())
-			
 			 self.position(nuevaPosicion)	
 			
-			 console.println(direction)
-			 
-			 if (game.colliders(self).size() > 0) {
-			 	game.colliders(self).first().reactTo(self) 
-			 }
+			 //console.println(direction)
+			gameController.updateTraps(previousPosition)
+			
+			if (game.colliders(self).size() > 0) {
+				game.colliders(self).forEach({ anObject => if (anObject != self) anObject.reactTo(self) }) 
+			}
 		}
 	}	
 	
-	method receivedDamage() {
+	method collect() { collected += 1}
+	method resetCollected() { collected = 0}
+	method collected() = collected
+	
+	method die() {
 		alive = false
-		game.say(self, "Ouch!!")
+		game.say(self, "Ouch!! traps are deadly once activated")
 		
 		game.onTick(2000, "deadBooby", { 
   			gameController.restartLevel()
 		})
 	}
 	
-	method collectCarrot(carrot) {
-		collectedCarrots.add(carrot) 
-		self.reDraw()
-	}
-	
-	method reDraw() {
-		/* Put the player again in the top layer */
-		game.removeVisual(self)
-		game.addVisual(self)
-	}
-	
-	method restartAt(aPosition) {
+	method resetAt(aPosition) {
 		position = aPosition
-		collectedCarrots.clear()
 		alive = true
+		self.resetCollected()
 	}
 }

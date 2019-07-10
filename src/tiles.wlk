@@ -94,7 +94,7 @@ class Carrot {
 
 	constructor() = self(game.center())
 	constructor(x,y) = self(new Position(x,y))
-	constructor(_position) { position = _position }
+	constructor(_position) { position = _position 	}
 
 	method image() = assets.get("carrot")
 
@@ -102,8 +102,7 @@ class Carrot {
 	
 	method reactTo(player){
 		game.removeVisual(self)
-		game.addVisual(new Hole(position = self.position()))
-		player.collectCarrot(self)
+		player.collect()
 		gameController.carrotCollected()
 	}
 }
@@ -148,7 +147,7 @@ class EndPoint {
 }
 
 class Trap { 
-	var property activated = false 
+	var activated = false 
 	var property position 
 	 
 	constructor() = self(game.center())
@@ -157,45 +156,45 @@ class Trap {
 	 
 	method image() = if (activated) assets.get("spikesUp") else assets.get("spikesDown") 
 	 
-	method  canBeSteppedOn () = true 
-	 
+	method canBeSteppedOn () = true 
+	
+	method disable() { activated = false}
+	
+	method change() { activated = not activated} 
+	
 	method reactTo(player) { 
-		 
-		if (self.activated()) { 
-			player.receivedDamage()		 
-		} 
-		self.activated(true) 
+		if (activated) { 
+			player.die()		 
+		}  
 	}
 } 
 
+
+//the runway is incomplete
 class Runway{
-	var property position
-	var property isVerticalPosition = true
+	const property position
+	var property isVerticalPosition = false
 	
-	constructor() = self(game.center())
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position){position = _position}
 	
 	method image() = if (isVerticalPosition) assets.get("verticalRunway") else assets.get("horizontalRunway")
 	
-	method canBeSteppedOn () = true
+	method change() { isVerticalPosition = not isVerticalPosition} 
 	
-	method reactTo(player){
-		if(self.isVerticalPosition()){
-			self.isVerticalPosition(false)
-		} else{
-			self.isVerticalPosition(true)
-		}
-	}
- }
+	method canBeSteppedOn () = true 
+	
+	method reactTo(player){ } 
+	
+}
 
 class Hole {
-	var property position
+	const property position
 	constructor(x,y) = self(new Position(x,y))
 	constructor(_position) { position = _position }
 	method image() = assets.get("groundHole")
 	method canBeSteppedOn () = true 
-	method reactTo(player){}
+	method reactTo(player) { }
 }
 
 /*
