@@ -29,6 +29,7 @@ object gameController {
 		keyboard.s().onPressDo { player.move(player.position().down(1)) }
 		keyboard.a().onPressDo { player.move(player.position().left(1)) }
 		keyboard.d().onPressDo { player.move(player.position().right(1)) }
+		
 		keyboard.up().onPressDo { player.move(player.position().up(1)) }
 		keyboard.down().onPressDo { player.move(player.position().down(1)) }
 		keyboard.left().onPressDo { player.move(player.position().left(1)) }
