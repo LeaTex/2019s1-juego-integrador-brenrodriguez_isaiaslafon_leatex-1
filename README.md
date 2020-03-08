@@ -4,6 +4,8 @@
 
 -Possible names: "El conejo angurriento", "Bobby Carrot Reloaded", "mangia carota", "robo salvaje", "farm survival"
 
+![](assets/levelexample.png)
+
 Objects or classes to implement:
 
 	-player (can move 4 direction)
