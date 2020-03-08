@@ -1,6 +1,6 @@
 
 
-# Project: Boobby Carrot Puzzler Game Type:
+# Project: Bobby Carrot Puzzler Game Type:
 
 -Possible names: "El conejo angurriento", "Bobby Carrot Reloaded", "mangia carota", "robo salvaje", "farm survival"
 
